@@ -95,16 +95,45 @@ def main():
         print("Run: python -m rag list  # to see available assembly IDs", file=sys.stderr)
         sys.exit(1)
 
+    # Ensure UTF-8 encoding for output (fixes Windows cp1252 encoding issues)
+    if sys.stdout.encoding != 'utf-8':
+        # Reopen stdout with UTF-8 encoding if possible
+        try:
+            import io
+            sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+        except (AttributeError, OSError):
+            # Fallback: use ensure_ascii=True for JSON to avoid encoding issues
+            pass
+    
     if args.json:
-        print(json.dumps(result, ensure_ascii=False, indent=2))
+        # Use ensure_ascii=False but handle encoding issues
+        try:
+            json_str = json.dumps(result, ensure_ascii=False, indent=2)
+            print(json_str)
+        except UnicodeEncodeError:
+            # Fallback: escape non-ASCII characters
+            json_str = json.dumps(result, ensure_ascii=True, indent=2)
+            print(json_str)
     else:
-        print(result.get("answer", ""))
-        if result.get("facts"):
-            print("\nFacts:")
-            for f in result["facts"]:
-                print(f"  - {f}")
-        if result.get("sources"):
-            print("\nSources:", result["sources"])
+        try:
+            print(result.get("answer", ""))
+            if result.get("facts"):
+                print("\nFacts:")
+                for f in result["facts"]:
+                    print(f"  - {f}")
+            if result.get("sources"):
+                print("\nSources:", result["sources"])
+        except UnicodeEncodeError:
+            # Fallback: replace problematic characters
+            answer = result.get("answer", "").encode('ascii', 'replace').decode('ascii')
+            print(answer)
+            if result.get("facts"):
+                print("\nFacts:")
+                for f in result["facts"]:
+                    fact_safe = f.encode('ascii', 'replace').decode('ascii')
+                    print(f"  - {fact_safe}")
+            if result.get("sources"):
+                print("\nSources:", result["sources"])
 
 
 if __name__ == "__main__":

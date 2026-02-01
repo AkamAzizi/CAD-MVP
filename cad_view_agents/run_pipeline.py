@@ -33,6 +33,11 @@ def find_freecad_cmd():
         program_files = os.environ.get("ProgramFiles", "C:\\Program Files")
         program_files_x86 = os.environ.get("ProgramFiles(x86)", "C:\\Program Files (x86)")
         paths = [
+            # Check versioned directories (e.g., "FreeCAD 1.0")
+            os.path.join(program_files, "FreeCAD 1.0", "bin", "FreeCADCmd.exe"),
+            os.path.join(program_files, "FreeCAD 0.21", "bin", "FreeCADCmd.exe"),
+            os.path.join(program_files, "FreeCAD 0.20", "bin", "FreeCADCmd.exe"),
+            # Standard paths
             os.path.join(program_files, "FreeCAD", "bin", "FreeCADCmd.exe"),
             os.path.join(program_files_x86, "FreeCAD", "bin", "FreeCADCmd.exe"),
             os.path.join(os.environ.get("LOCALAPPDATA", ""), "Programs", "FreeCAD", "bin", "FreeCADCmd.exe"),
@@ -102,11 +107,26 @@ def main():
         system = platform.system()
         if system == "Darwin":
             print("  macOS: /Applications/FreeCAD.app/Contents/Resources/bin/freecadcmd", file=sys.stderr)
+            print("\nTo install FreeCAD on macOS:", file=sys.stderr)
+            print("  brew install --cask freecad", file=sys.stderr)
+            print("  Or download from: https://www.freecad.org/downloads.php", file=sys.stderr)
         elif system == "Windows":
             print("  Windows: C:\\Program Files\\FreeCAD\\bin\\FreeCADCmd.exe", file=sys.stderr)
             print("  Or add FreeCAD to your PATH", file=sys.stderr)
+            print("\nTo install FreeCAD on Windows:", file=sys.stderr)
+            print("  1. Download installer from: https://www.freecad.org/downloads.php", file=sys.stderr)
+            print("  2. Install FreeCAD (default location: C:\\Program Files\\FreeCAD)", file=sys.stderr)
+            print("  3. Or set environment variable: set FREECAD_CMD=C:\\path\\to\\FreeCADCmd.exe", file=sys.stderr)
+            print("\nTo set FREECAD_CMD temporarily (this session only):", file=sys.stderr)
+            print("  $env:FREECAD_CMD = 'C:\\Program Files\\FreeCAD\\bin\\FreeCADCmd.exe'", file=sys.stderr)
+            print("\nTo set FREECAD_CMD permanently:", file=sys.stderr)
+            print("  [System.Environment]::SetEnvironmentVariable('FREECAD_CMD', 'C:\\Program Files\\FreeCAD\\bin\\FreeCADCmd.exe', 'User')", file=sys.stderr)
         else:
             print("  Linux: /usr/bin/freecadcmd or install via package manager", file=sys.stderr)
+            print("\nTo install FreeCAD on Linux:", file=sys.stderr)
+            print("  Ubuntu/Debian: sudo apt-get install freecad", file=sys.stderr)
+            print("  Fedora: sudo dnf install freecad", file=sys.stderr)
+            print("  Or download from: https://www.freecad.org/downloads.php", file=sys.stderr)
         sys.exit(1)
     
     # Convert arguments to JSON format (handles Unicode properly)

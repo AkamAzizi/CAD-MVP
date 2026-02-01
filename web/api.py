@@ -188,7 +188,7 @@ def ask(req: AskRequest):
     Ask RAG a question about an assembly. Returns answer, facts, sources.
     """
     import sys
-    print(f"[API] POST /api/assemblies/ask assembly_id={req.assembly_id!r}", file=sys.stderr, flush=True)
+    print(f"[API] POST /api/assemblies/ask assembly_id={req.assembly_id!r} question={req.question[:50]!r}...", file=sys.stderr, flush=True)
     if not req.assembly_id.strip():
         raise HTTPException(status_code=400, detail="assembly_id required")
     if not req.question.strip():
@@ -197,6 +197,9 @@ def ask(req: AskRequest):
     # Use subprocess so RAG runs in cad_view_agents context (output/, rag_chroma)
     # Use sys.executable to ensure we use the same Python interpreter
     python_cmd = sys.executable
+    # Set UTF-8 encoding for Windows compatibility
+    env = os.environ.copy()
+    env['PYTHONIOENCODING'] = 'utf-8'
     try:
         proc = subprocess.run(
             [
@@ -209,29 +212,47 @@ def ask(req: AskRequest):
             cwd=str(CAD_VIEW_AGENTS),
             capture_output=True,
             text=True,
+            encoding='utf-8',
+            errors='replace',  # Replace problematic characters instead of failing
+            env=env,
             timeout=120,
         )
     except subprocess.TimeoutExpired:
+        print("[API] RAG request timed out after 120s", file=sys.stderr, flush=True)
         raise HTTPException(status_code=504, detail="RAG request timed out")
     except Exception as e:
+        print(f"[API] RAG subprocess exception: {e}", file=sys.stderr, flush=True)
         raise HTTPException(status_code=500, detail=f"RAG failed: {e}")
 
     if proc.returncode != 0:
-        err = (proc.stderr or proc.stdout or "")[-1000:]
-        raise HTTPException(status_code=500, detail=f"RAG error: {err}")
+        err = (proc.stderr or proc.stdout or "")[-2000:]  # Show more error context
+        print(f"[API] RAG failed with return code {proc.returncode}", file=sys.stderr, flush=True)
+        print(f"[API] RAG stderr: {proc.stderr[:500] if proc.stderr else '(none)'}", file=sys.stderr, flush=True)
+        print(f"[API] RAG stdout: {proc.stdout[:500] if proc.stdout else '(none)'}", file=sys.stderr, flush=True)
+        raise HTTPException(status_code=500, detail=f"RAG error (exit {proc.returncode}): {err}")
 
     out = (proc.stdout or "").strip()
+    if not out:
+        print("[API] RAG returned empty output", file=sys.stderr, flush=True)
+        raise HTTPException(status_code=500, detail="RAG returned empty output")
+    
     # RAG or deps may print warnings before JSON; try full output first, then from first {
     data = None
     try:
         data = json.loads(out)
-    except json.JSONDecodeError:
+    except json.JSONDecodeError as e:
         start = out.find("{")
         if start >= 0:
             try:
                 data = json.loads(out[start:])
             except json.JSONDecodeError:
-                pass
+                print(f"[API] RAG JSON parse error: {e}", file=sys.stderr, flush=True)
+                print(f"[API] RAG output (first 500 chars): {out[:500]}", file=sys.stderr, flush=True)
+                raise HTTPException(status_code=500, detail=f"RAG returned invalid JSON: {str(e)[:200]}")
+        else:
+            print(f"[API] RAG output contains no JSON: {out[:500]}", file=sys.stderr, flush=True)
+            raise HTTPException(status_code=500, detail="RAG output contains no JSON")
+    
     if data is None:
         raise HTTPException(status_code=500, detail="RAG returned invalid JSON")
 
