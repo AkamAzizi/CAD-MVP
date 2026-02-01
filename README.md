@@ -14,7 +14,10 @@ CAD-MVP converts 3D CAD assemblies (STEP files) into 2D technical drawings with 
 
 ### 1. Prerequisites
 
-- **macOS** (FreeCAD at `/Applications/FreeCAD.app`)
+- **FreeCAD** installed (see platform-specific paths below)
+  - **macOS**: `/Applications/FreeCAD.app`
+  - **Windows**: `C:\Program Files\FreeCAD\bin\FreeCADCmd.exe` (or add to PATH)
+  - **Linux**: `/usr/bin/freecadcmd` (or install via package manager)
 - **Python 3.10+** (for web API and RAG)
 - **Node 18+** (for frontend)
 

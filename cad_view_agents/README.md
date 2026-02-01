@@ -49,14 +49,24 @@ Systemet använder en **multi-agent pipeline** där olika specialiserade "agente
 
 ## Requirements
 
-- macOS
-- FreeCAD 1.0.2 installed at `/Applications/FreeCAD.app`
-- No external Python dependencies (uses FreeCAD's bundled Python)
+- **FreeCAD** installed (see platform-specific paths below)
+  - **macOS**: `/Applications/FreeCAD.app/Contents/Resources/bin/freecadcmd`
+  - **Windows**: `C:\Program Files\FreeCAD\bin\FreeCADCmd.exe` (or add to PATH)
+  - **Linux**: `/usr/bin/freecadcmd` (or install via package manager)
+- **Python 3.10+** (for cross-platform launchers)
+- No external Python dependencies for pipeline (uses FreeCAD's bundled Python)
 
 ## How to Run the Pipeline
 
 ### Basic Usage (Original Pipeline)
 
+**Cross-platform (recommended):**
+```bash
+cd cad_view_agents
+python run_freecad.py "/path/to/your/file.step"
+```
+
+**macOS/Linux (bash script):**
 ```bash
 cd cad_view_agents
 ./run_freecad.sh "/path/to/your/file.step"
@@ -66,6 +76,19 @@ cd cad_view_agents
 
 The new `pipeline.py` generates complete technical drawings with balloons and BOM tables:
 
+**Cross-platform (recommended):**
+```bash
+cd cad_view_agents
+python run_pipeline.py input.step --out output.pdf
+```
+
+**Windows (batch file):**
+```cmd
+cd cad_view_agents
+run_pipeline.bat input.step --out output.pdf
+```
+
+**macOS/Linux (bash script):**
 ```bash
 cd cad_view_agents
 ./run_pipeline.sh input.step --out output.pdf
@@ -82,18 +105,20 @@ cd cad_view_agents
 **Examples:**
 
 ```bash
-# Basic usage - auto-generate PDF
-./run_pipeline.sh input.step --out output.pdf
+# Basic usage - auto-generate PDF (cross-platform)
+python run_pipeline.py input.step --out output.pdf
 
 # Specify sheet size and scale
-./run_pipeline.sh input.step --out output.pdf --sheet-size A3 --scale 0.5
+python run_pipeline.py input.step --out output.pdf --sheet-size A3 --scale 0.5
 
 # Generate both PDF and DXF
-./run_pipeline.sh input.step --out output
+python run_pipeline.py input.step --out output
 
 # With AI-enhanced view selection
-./run_pipeline.sh input.step --out output.pdf --use-ai
+python run_pipeline.py input.step --out output.pdf --use-ai
 ```
+
+**Note:** On Windows, you can also use `run_pipeline.bat` instead of `python run_pipeline.py`.
 
 ### Example (Original Pipeline)
 

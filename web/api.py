@@ -5,8 +5,11 @@ Run: uvicorn web.api:app --reload --port 8000
 """
 import json
 import os
+import platform
 import re
+import shutil
 import subprocess
+import sys
 import uuid
 from pathlib import Path
 
@@ -19,6 +22,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 CAD_VIEW_AGENTS = PROJECT_ROOT / "cad_view_agents"
 OUTPUT_DIR = CAD_VIEW_AGENTS / "output"
 UPLOADS_DIR = PROJECT_ROOT / "web" / "uploads"
+RUN_PIPELINE_PY = CAD_VIEW_AGENTS / "run_pipeline.py"
 RUN_PIPELINE_SH = CAD_VIEW_AGENTS / "run_pipeline.sh"
 RUN_RAG_SH = CAD_VIEW_AGENTS / "run_rag.sh"
 
@@ -116,9 +120,24 @@ async def upload_and_process(file: UploadFile = File(...)):
 
     abs_path = str(save_path.resolve())
     print(f"[API] File saved, running pipeline: {abs_path}", file=sys.stderr, flush=True)
+    
+    # Use cross-platform Python launcher if available, otherwise fall back to shell script
+    if RUN_PIPELINE_PY.exists():
+        # Use Python launcher (cross-platform)
+        python_cmd = sys.executable
+        pipeline_cmd = [python_cmd, str(RUN_PIPELINE_PY), abs_path]
+    elif RUN_PIPELINE_SH.exists() and platform.system() != "Windows":
+        # Fall back to shell script on Unix systems
+        pipeline_cmd = ["bash", str(RUN_PIPELINE_SH), abs_path]
+    else:
+        raise HTTPException(
+            status_code=500,
+            detail="Pipeline launcher not found. Please ensure run_pipeline.py exists."
+        )
+    
     try:
         proc = subprocess.run(
-            [str(RUN_PIPELINE_SH), abs_path],
+            pipeline_cmd,
             cwd=str(CAD_VIEW_AGENTS),
             capture_output=True,
             text=True,
@@ -139,7 +158,7 @@ async def upload_and_process(file: UploadFile = File(...)):
                 status_code=500,
                 detail=(
                     "FreeCAD crashed (segmentation fault) in headless mode. "
-                    "You can run the pipeline manually: ./cad_view_agents/run_pipeline.sh <file.step> "
+                    "You can run the pipeline manually: python cad_view_agents/run_pipeline.py <file.step> "
                     "Or choose an existing assembly below to use the Q&A chat."
                 ),
             )
@@ -176,10 +195,12 @@ def ask(req: AskRequest):
         raise HTTPException(status_code=400, detail="question required")
 
     # Use subprocess so RAG runs in cad_view_agents context (output/, rag_chroma)
+    # Use sys.executable to ensure we use the same Python interpreter
+    python_cmd = sys.executable
     try:
         proc = subprocess.run(
             [
-                "python3", "-m", "rag", "ask",
+                python_cmd, "-m", "rag", "ask",
                 "--assembly-id", req.assembly_id,
                 "--question", req.question,
                 "--snapshots-dir", str(OUTPUT_DIR),
