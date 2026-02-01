@@ -1,0 +1,508 @@
+{
+  "snapshot_version": "1.0",
+  "assembly_id": "asm_eb9f276cc74e4e4ba6fff36e05b3cc_342cb4df",
+  "timestamp": "2026-01-29T21:20:16.149067+00:00",
+  "source_file": "/Users/akamazizi/Desktop/CAD-MVP/web/uploads/eb9f276cc74e4e4ba6fff36e05b3cc62_strut.step",
+  "source_file_hash": "sha256:1875a8faaca985a8931693883c0c96b2d2085621ce5d9862e6c8c74dd391e50e",
+  "overview": {
+    "parts_count_total": 11,
+    "parts_count_unique": 11,
+    "bbox_mm": {},
+    "primary_axis": null,
+    "description": "The assembly represented by the file \"eb9f276cc74e4e4ba6fff36e05b3cc62_strut.step\" is likely a multi-part structural strut system, intended for applications requiring enhanced rigidity and support in non-axis-aligned configurations, such as in aerospace or automotive frameworks. With 11 interconnected components, it is designed to distribute loads efficiently across various orientations, ensuring stability and performance under dynamic conditions.",
+    "is_assembly": true
+  },
+  "parts_tree": {
+    "parts": [
+      {
+        "id": "PART_13008",
+        "name": "STRUT CHANNEL BEAM CLAMP BRACKET 005",
+        "label": "STRUT CHANNEL BEAM CLAMP BRACKET 005",
+        "geometry_hash": "294849e245ce07d973c086cc6f9f5430",
+        "bbox_mm": {
+          "x": 14.664696837416507,
+          "y": 6.350002033676152,
+          "z": 14.664696837416502
+        },
+        "volume_mm3": 430.0502159767242,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_13708",
+        "name": "Y-axis",
+        "label": "Y-axis",
+        "geometry_hash": "267632c8ed18ac917d233a466c71c4cc",
+        "bbox_mm": {
+          "x": 0,
+          "y": 2e+100,
+          "z": 0
+        },
+        "volume_mm3": 0.0,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_18330",
+        "name": "X-axis",
+        "label": "X-axis",
+        "geometry_hash": "a3fb718b1a0bb302e09091c9c608097a",
+        "bbox_mm": {
+          "x": 2e+100,
+          "y": 0,
+          "z": 0
+        },
+        "volume_mm3": 0.0,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_204",
+        "name": "STRUT CHANNEL BEAM CLAMP BRACKET 006",
+        "label": "STRUT CHANNEL BEAM CLAMP BRACKET 006",
+        "geometry_hash": "5d43fdace0b5ad6383411abe697e21ec",
+        "bbox_mm": {
+          "x": 76.2,
+          "y": 95.55405356167759,
+          "z": 63.49999999999999
+        },
+        "volume_mm3": 46968.10975423964,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_26161",
+        "name": "STRUT CHANNEL BEAM CLAMP BRACKET 004",
+        "label": "STRUT CHANNEL BEAM CLAMP BRACKET 004",
+        "geometry_hash": "099c4be79f078fe30a76da29126734d1",
+        "bbox_mm": {
+          "x": 14.664696837416496,
+          "y": 6.350002033676159,
+          "z": 14.664696837416502
+        },
+        "volume_mm3": 430.05021597672396,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_34888",
+        "name": "Z-axis",
+        "label": "Z-axis",
+        "geometry_hash": "1fed02440478f35b332e1a841372b5a8",
+        "bbox_mm": {
+          "x": 0,
+          "y": 0,
+          "z": 2e+100
+        },
+        "volume_mm3": 0.0,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_69837",
+        "name": "YZ-plane",
+        "label": "YZ-plane",
+        "geometry_hash": "7deeed6246c4b224b61baf02d11b9f0d",
+        "bbox_mm": {
+          "x": 0,
+          "y": 2e+100,
+          "z": 2e+100
+        },
+        "volume_mm3": 1.7958932119522137e+152,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_70960",
+        "name": "XZ-plane",
+        "label": "XZ-plane",
+        "geometry_hash": "cd643f135e4bf47d4eaff86b8e073b90",
+        "bbox_mm": {
+          "x": 2e+100,
+          "y": 0,
+          "z": 2e+100
+        },
+        "volume_mm3": 4.789048565205903e+152,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_74536",
+        "name": "STRUT CHANNEL BEAM CLAMP BRACKET 2",
+        "label": "STRUT CHANNEL BEAM CLAMP BRACKET 2",
+        "geometry_hash": "3d8508c4fcf517230335abe929ff2f28",
+        "bbox_mm": {
+          "x": 64.56541517950812,
+          "y": 95.55405356167759,
+          "z": 9.525000000000006
+        },
+        "volume_mm3": 14241.304926270654,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_77574",
+        "name": "XY-plane",
+        "label": "XY-plane",
+        "geometry_hash": "4944d472e49e2b5914b44e07465bed06",
+        "bbox_mm": {
+          "x": 2e+100,
+          "y": 2e+100,
+          "z": 0
+        },
+        "volume_mm3": 0.0,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      },
+      {
+        "id": "PART_99432",
+        "name": "STRUT CHANNEL BEAM CLAMP BRACKET 003",
+        "label": "STRUT CHANNEL BEAM CLAMP BRACKET 003",
+        "geometry_hash": "dbddabe3f36d3d0b950a1cccfbc3cbc8",
+        "bbox_mm": {
+          "x": 76.2,
+          "y": 22.225,
+          "z": 63.49999999999999
+        },
+        "volume_mm3": 31861.360427115967,
+        "placement": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "instances": 1
+      }
+    ]
+  },
+  "bom_preview": [
+    {
+      "item": 1,
+      "part_number": "PART_13008",
+      "description": "STRUT CHANNEL BEAM CLAMP BRACKET 005",
+      "quantity": 1,
+      "material": "N/A"
+    },
+    {
+      "item": 2,
+      "part_number": "PART_13708",
+      "description": "Y-axis",
+      "quantity": 1,
+      "material": "N/A"
+    },
+    {
+      "item": 3,
+      "part_number": "PART_18330",
+      "description": "X-axis",
+      "quantity": 1,
+      "material": "N/A"
+    },
+    {
+      "item": 4,
+      "part_number": "PART_204",
+      "description": "STRUT CHANNEL BEAM CLAMP BRACKET 006",
+      "quantity": 1,
+      "material": "None"
+    },
+    {
+      "item": 5,
+      "part_number": "PART_26161",
+      "description": "STRUT CHANNEL BEAM CLAMP BRACKET 004",
+      "quantity": 1,
+      "material": "N/A"
+    },
+    {
+      "item": 6,
+      "part_number": "PART_34888",
+      "description": "Z-axis",
+      "quantity": 1,
+      "material": "N/A"
+    },
+    {
+      "item": 7,
+      "part_number": "PART_69837",
+      "description": "YZ-plane",
+      "quantity": 1,
+      "material": "N/A"
+    },
+    {
+      "item": 8,
+      "part_number": "PART_70960",
+      "description": "XZ-plane",
+      "quantity": 1,
+      "material": "N/A"
+    },
+    {
+      "item": 9,
+      "part_number": "PART_74536",
+      "description": "STRUT CHANNEL BEAM CLAMP BRACKET 2",
+      "quantity": 1,
+      "material": "N/A"
+    },
+    {
+      "item": 10,
+      "part_number": "PART_77574",
+      "description": "XY-plane",
+      "quantity": 1,
+      "material": "N/A"
+    },
+    {
+      "item": 11,
+      "part_number": "PART_99432",
+      "description": "STRUT CHANNEL BEAM CLAMP BRACKET 003",
+      "quantity": 1,
+      "material": "N/A"
+    }
+  ],
+  "orientation_heuristics": {
+    "primary_axis": null,
+    "aspect_ratios": {},
+    "recommended_views": {
+      "iso": [
+        1,
+        1,
+        1
+      ],
+      "front": [
+        0,
+        0,
+        1
+      ],
+      "top": [
+        0,
+        1,
+        0
+      ],
+      "right": [
+        1,
+        0,
+        0
+      ]
+    },
+    "view_recommendations": [
+      {
+        "view_name": "front",
+        "score": 0.92,
+        "reason": "Selected view, score 0.92"
+      },
+      {
+        "view_name": "top",
+        "score": 0.9,
+        "reason": "Selected view, score 0.90"
+      },
+      {
+        "view_name": "iso",
+        "score": 0.7000000000000001,
+        "reason": "Selected view, score 0.70"
+      },
+      {
+        "view_name": "right",
+        "score": 0.88,
+        "reason": "Selected view, score 0.88"
+      }
+    ]
+  },
+  "pipeline_artifacts": {
+    "pdf_path": null,
+    "dxf_path": null,
+    "metadata_json_path": "output/eb9f276cc74e4e4ba6fff36e05b3cc62_strut.json",
+    "view_svg_paths": [],
+    "selected_views": [
+      "front",
+      "top",
+      "iso",
+      "right"
+    ],
+    "sheet_size": "A4",
+    "scale": 0.1,
+    "view_scores": {
+      "front": 0.92,
+      "top": 0.9,
+      "iso": 0.7000000000000001,
+      "right": 0.88
+    }
+  },
+  "validation_errors": []
+}

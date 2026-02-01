@@ -1,0 +1,49 @@
+{
+  "step_file": "/Users/akamazizi/Desktop/CAD-MVP/web/uploads/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.step",
+  "output_files": [
+    "output/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.json",
+    "output/asm_f274b5d997e9470a910dcd5bd21c30_04ba3839_snapshot.json",
+    "output/asm_f274b5d997e9470a910dcd5bd21c30_04ba3839_snapshot.md",
+    "output/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.pdf",
+    "output/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.dxf"
+  ],
+  "part_count": 1,
+  "views": [
+    "front",
+    "top",
+    "iso",
+    "right"
+  ],
+  "sheet_size": "A2",
+  "scale": 1.0,
+  "balloon_mappings": {
+    "PART_75647": 1
+  },
+  "bom": {
+    "columns": [
+      "Item",
+      "Part Number",
+      "Description",
+      "Qty",
+      "Material"
+    ],
+    "rows": [
+      {
+        "item": 1,
+        "part_number": "PART_75647",
+        "description": "093043W",
+        "quantity": 1,
+        "material": "N/A"
+      }
+    ]
+  },
+  "qa": {
+    "status": "fail",
+    "issues": [
+      "Artifact too small (691 bytes): output/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.json"
+    ]
+  },
+  "export_errors": [],
+  "snapshot_path": "output/asm_f274b5d997e9470a910dcd5bd21c30_04ba3839_snapshot.json",
+  "assembly_id": "asm_f274b5d997e9470a910dcd5bd21c30_04ba3839"
+}

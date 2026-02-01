@@ -1,0 +1,279 @@
+{
+  "step_file": "/Users/akamazizi/Downloads/ebara-pump-80x65-fsja-1/bo\u031bm nu\u031bo\u031b\u0301c.STEP",
+  "output_files": [],
+  "part_count": 64,
+  "views": [
+    "front",
+    "top",
+    "iso",
+    "right"
+  ],
+  "sheet_size": "A4",
+  "scale": 0.1,
+  "balloon_mappings": {
+    "PART_10997": 1,
+    "PART_13601": 2,
+    "PART_13708": 8,
+    "PART_17873": 9,
+    "PART_18330": 15,
+    "PART_18552": 16,
+    "PART_25081": 17,
+    "PART_30606": 18,
+    "PART_31726": 19,
+    "PART_33681": 20,
+    "PART_33913": 21,
+    "PART_34888": 27,
+    "PART_35734": 28,
+    "PART_41273": 30,
+    "PART_43345": 31,
+    "PART_48940": 33,
+    "PART_50776": 35,
+    "PART_60149": 36,
+    "PART_64411": 37,
+    "PART_66160": 38,
+    "PART_69301": 39,
+    "PART_69837": 45,
+    "PART_70960": 51,
+    "PART_73816": 52,
+    "PART_77574": 58,
+    "PART_80249": 59,
+    "PART_85421": 60,
+    "PART_85558": 61,
+    "PART_88184": 62,
+    "PART_89431": 63,
+    "PART_89640": 64
+  },
+  "bom": {
+    "columns": [
+      "Item",
+      "Part Number",
+      "Description",
+      "Qty",
+      "Material"
+    ],
+    "rows": [
+      {
+        "item": 1,
+        "part_number": "PART_10997",
+        "description": "Part6",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 2,
+        "part_number": "PART_13601",
+        "description": "v?",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 8,
+        "part_number": "PART_13708",
+        "description": "Y-axis",
+        "quantity": 6,
+        "material": "N/A"
+      },
+      {
+        "item": 9,
+        "part_number": "PART_17873",
+        "description": "skf_bearing_6207_2",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 15,
+        "part_number": "PART_18330",
+        "description": "X-axis",
+        "quantity": 6,
+        "material": "N/A"
+      },
+      {
+        "item": 16,
+        "part_number": "PART_18552",
+        "description": "bulong m8",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 17,
+        "part_number": "PART_25081",
+        "description": "Part3",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 18,
+        "part_number": "PART_30606",
+        "description": "Part006",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 19,
+        "part_number": "PART_31726",
+        "description": "skf_bearing_6207_003",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 20,
+        "part_number": "PART_33681",
+        "description": "Part007",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 21,
+        "part_number": "PART_33913",
+        "description": "bulong m011",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 27,
+        "part_number": "PART_34888",
+        "description": "Z-axis",
+        "quantity": 6,
+        "material": "N/A"
+      },
+      {
+        "item": 28,
+        "part_number": "PART_35734",
+        "description": "Part005",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 30,
+        "part_number": "PART_41273",
+        "description": "skf_bearing_6207_2_02",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 31,
+        "part_number": "PART_43345",
+        "description": "bulong m013",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 33,
+        "part_number": "PART_48940",
+        "description": "skf_bearing_6207_2_01",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 35,
+        "part_number": "PART_50776",
+        "description": "skf_bearing_6207_2_03",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 36,
+        "part_number": "PART_60149",
+        "description": "Part4",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 37,
+        "part_number": "PART_64411",
+        "description": "Part009",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 38,
+        "part_number": "PART_66160",
+        "description": "p\u0ca0d? bom",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 39,
+        "part_number": "PART_69301",
+        "description": "Part5",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 45,
+        "part_number": "PART_69837",
+        "description": "YZ-plane",
+        "quantity": 6,
+        "material": "N/A"
+      },
+      {
+        "item": 51,
+        "part_number": "PART_70960",
+        "description": "XZ-plane",
+        "quantity": 6,
+        "material": "N/A"
+      },
+      {
+        "item": 52,
+        "part_number": "PART_73816",
+        "description": "bulong m012",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 58,
+        "part_number": "PART_77574",
+        "description": "XY-plane",
+        "quantity": 6,
+        "material": "N/A"
+      },
+      {
+        "item": 59,
+        "part_number": "PART_80249",
+        "description": "bom nu?c",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 60,
+        "part_number": "PART_85421",
+        "description": "Part008",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 61,
+        "part_number": "PART_85558",
+        "description": "puli nh?",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 62,
+        "part_number": "PART_88184",
+        "description": "bulong m010",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 63,
+        "part_number": "PART_89431",
+        "description": "Part2",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 64,
+        "part_number": "PART_89640",
+        "description": "bulong m009",
+        "quantity": 1,
+        "material": "N/A"
+      }
+    ]
+  },
+  "qa": {
+    "status": "skip",
+    "issues": []
+  },
+  "export_errors": []
+}

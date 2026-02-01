@@ -1,0 +1,49 @@
+{
+  "step_file": "/Users/akamazizi/Desktop/CAD-MVP/web/uploads/1f9627f2fcdc4af4abbcb7867975ef70_Pump_Manifold1_v3.step",
+  "output_files": [
+    "output/1f9627f2fcdc4af4abbcb7867975ef70_Pump_Manifold1_v3.json",
+    "output/asm_1f9627f2fcdc4af4abbcb7867975ef_d937bf6e_snapshot.json",
+    "output/asm_1f9627f2fcdc4af4abbcb7867975ef_d937bf6e_snapshot.md",
+    "output/1f9627f2fcdc4af4abbcb7867975ef70_Pump_Manifold1_v3.pdf",
+    "output/1f9627f2fcdc4af4abbcb7867975ef70_Pump_Manifold1_v3.dxf"
+  ],
+  "part_count": 1,
+  "views": [
+    "front",
+    "top",
+    "iso",
+    "right"
+  ],
+  "sheet_size": "A1",
+  "scale": 1.0,
+  "balloon_mappings": {
+    "PART_54529": 1
+  },
+  "bom": {
+    "columns": [
+      "Item",
+      "Part Number",
+      "Description",
+      "Qty",
+      "Material"
+    ],
+    "rows": [
+      {
+        "item": 1,
+        "part_number": "PART_54529",
+        "description": "Pump Manifold v2 (5-axis)",
+        "quantity": 1,
+        "material": "N/A"
+      }
+    ]
+  },
+  "qa": {
+    "status": "fail",
+    "issues": [
+      "Artifact too small (710 bytes): output/1f9627f2fcdc4af4abbcb7867975ef70_Pump_Manifold1_v3.json"
+    ]
+  },
+  "export_errors": [],
+  "snapshot_path": "output/asm_1f9627f2fcdc4af4abbcb7867975ef_d937bf6e_snapshot.json",
+  "assembly_id": "asm_1f9627f2fcdc4af4abbcb7867975ef_d937bf6e"
+}

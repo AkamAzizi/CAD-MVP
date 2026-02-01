@@ -1,0 +1,119 @@
+{
+  "step_file": "/Users/akamazizi/Desktop/cad auto/strut.step",
+  "output_files": [],
+  "part_count": 11,
+  "views": [
+    "front",
+    "top",
+    "iso",
+    "right"
+  ],
+  "sheet_size": "A4",
+  "scale": 0.1,
+  "balloon_mappings": {
+    "PART_13008": 1,
+    "PART_13708": 2,
+    "PART_18330": 3,
+    "PART_204": 4,
+    "PART_26161": 5,
+    "PART_34888": 6,
+    "PART_69837": 7,
+    "PART_70960": 8,
+    "PART_74536": 9,
+    "PART_77574": 10,
+    "PART_99432": 11
+  },
+  "bom": {
+    "columns": [
+      "Item",
+      "Part Number",
+      "Description",
+      "Qty",
+      "Material"
+    ],
+    "rows": [
+      {
+        "item": 1,
+        "part_number": "PART_13008",
+        "description": "STRUT CHANNEL BEAM CLAMP BRACKET 005",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 2,
+        "part_number": "PART_13708",
+        "description": "Y-axis",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 3,
+        "part_number": "PART_18330",
+        "description": "X-axis",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 4,
+        "part_number": "PART_204",
+        "description": "STRUT CHANNEL BEAM CLAMP BRACKET 006",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 5,
+        "part_number": "PART_26161",
+        "description": "STRUT CHANNEL BEAM CLAMP BRACKET 004",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 6,
+        "part_number": "PART_34888",
+        "description": "Z-axis",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 7,
+        "part_number": "PART_69837",
+        "description": "YZ-plane",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 8,
+        "part_number": "PART_70960",
+        "description": "XZ-plane",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 9,
+        "part_number": "PART_74536",
+        "description": "STRUT CHANNEL BEAM CLAMP BRACKET 2",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 10,
+        "part_number": "PART_77574",
+        "description": "XY-plane",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 11,
+        "part_number": "PART_99432",
+        "description": "STRUT CHANNEL BEAM CLAMP BRACKET 003",
+        "quantity": 1,
+        "material": "N/A"
+      }
+    ]
+  },
+  "qa": {
+    "status": "skip",
+    "issues": []
+  },
+  "export_errors": []
+}

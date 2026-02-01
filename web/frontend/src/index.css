@@ -1,0 +1,325 @@
+:root {
+  --bg: #0f1419;
+  --surface: #1a2332;
+  --border: #2d3a4d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --success: #3fb950;
+  --error: #f85149;
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: var(--text);
+}
+
+.upload-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.upload-zone:hover,
+.upload-zone.dragover {
+  border-color: var(--accent);
+  background: rgba(88, 166, 255, 0.06);
+}
+
+.upload-zone p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.upload-zone .file-name {
+  margin-top: 0.5rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.actions {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+  background: rgba(88, 166, 255, 0.1);
+}
+
+.existing-assemblies {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.existing-label {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.existing-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.status {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.status.ready {
+  color: var(--success);
+}
+
+.status.error {
+  color: var(--error);
+}
+
+.assembly-id {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(63, 185, 80, 0.1);
+  border: 1px solid rgba(63, 185, 80, 0.3);
+  border-radius: var(--radius);
+  font-family: ui-monospace, monospace;
+  font-size: 0.9rem;
+  color: var(--success);
+}
+
+.chat-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.chat-panel h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.messages {
+  min-height: 160px;
+  max-height: 52vh;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding-right: 0.25rem;
+}
+
+.message {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+
+.message.user {
+  background: rgba(88, 166, 255, 0.12);
+  margin-left: 1rem;
+}
+
+.message.assistant {
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.message .answer {
+  white-space: pre-wrap;
+  margin-bottom: 0.5rem;
+}
+
+.details {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.details summary {
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.details ul {
+  margin: 0.25rem 0 0 1rem;
+  padding: 0;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input-row input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.chat-input-row input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.chat-input-row .btn {
+  flex-shrink: 0;
+}
+
+.error-box {
+  padding: 0.75rem;
+  background: rgba(248, 81, 73, 0.1);
+  border: 1px solid rgba(248, 81, 73, 0.3);
+  border-radius: var(--radius);
+  color: var(--error);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+/* Empty state */
+.empty-prompt {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  padding: 0.5rem 0;
+}
+
+/* Example questions – always visible above input */
+.example-questions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  padding: 0.75rem 0;
+  margin-bottom: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.example-questions-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.example-questions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.example-question {
+  padding: 0.45rem 0.7rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  color: var(--text);
+  font-size: 0.78rem;
+  line-height: 1.25;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+  max-width: 20em;
+}
+
+.example-question:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: rgba(88, 166, 255, 0.08);
+  color: var(--accent);
+}
+
+.example-question:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loading-indicator {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}

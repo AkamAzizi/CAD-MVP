@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/cad-view-agents/assembly-snapshot/schema.json",
+  "title": "AssemblySnapshot",
+  "description": "Machine-readable snapshot of an assembly after STEP import and pipeline analysis. Used as RAG source.",
+  "type": "object",
+  "required": [
+    "snapshot_version",
+    "assembly_id",
+    "timestamp",
+    "source_file",
+    "source_file_hash",
+    "overview",
+    "parts_tree",
+    "bom_preview",
+    "pipeline_artifacts"
+  ],
+  "properties": {
+    "snapshot_version": { "type": "string", "pattern": "^1\\.0$", "description": "Schema version" },
+    "assembly_id": { "type": "string", "description": "Stable ID derived from source path/hash" },
+    "timestamp": { "type": "string", "format": "date-time", "description": "ISO 8601" },
+    "source_file": { "type": "string", "description": "STEP file path" },
+    "source_file_hash": { "type": "string", "description": "SHA-256 of file (or first N bytes)" },
+    "overview": {
+      "type": "object",
+      "required": ["parts_count_total", "parts_count_unique"],
+      "properties": {
+        "parts_count_total": { "type": "integer" },
+        "parts_count_unique": { "type": "integer" },
+        "bbox_mm": {
+          "type": "object",
+          "properties": {
+            "x": { "type": "number" },
+            "y": { "type": "number" },
+            "z": { "type": "number" }
+          }
+        },
+        "primary_axis": { "type": "string", "enum": ["x", "y", "z"] },
+        "description": { "type": "string" },
+        "is_assembly": { "type": "boolean" }
+      }
+    },
+    "parts_tree": {
+      "type": "object",
+      "properties": {
+        "parts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "label": { "type": "string" },
+              "geometry_hash": { "type": "string" },
+              "bbox_mm": {
+                "type": "object",
+                "properties": { "x": { "type": "number" }, "y": { "type": "number" }, "z": { "type": "number" } }
+              },
+              "volume_mm3": { "type": "number" },
+              "placement": { "type": "array", "items": { "type": "number" }, "maxItems": 16 },
+              "instances": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "bom_preview": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": { "type": "integer" },
+          "part_number": { "type": "string" },
+          "description": { "type": "string" },
+          "quantity": { "type": "integer" },
+          "material": { "type": "string" }
+        }
+      }
+    },
+    "orientation_heuristics": {
+      "type": "object",
+      "properties": {
+        "primary_axis": { "type": "string" },
+        "aspect_ratios": { "type": "object" },
+        "recommended_views": { "type": "object" },
+        "view_recommendations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "view_name": { "type": "string" },
+              "score": { "type": "number" },
+              "reason": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "pipeline_artifacts": {
+      "type": "object",
+      "properties": {
+        "pdf_path": { "type": "string" },
+        "dxf_path": { "type": "string" },
+        "metadata_json_path": { "type": "string" },
+        "view_svg_paths": { "type": "array", "items": { "type": "string" } },
+        "selected_views": { "type": "array", "items": { "type": "string" } },
+        "sheet_size": { "type": "string" },
+        "scale": { "type": "number" },
+        "view_scores": { "type": "object" }
+      }
+    },
+    "validation_errors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Pipeline/QA/export errors and warnings"
+    }
+  }
+}

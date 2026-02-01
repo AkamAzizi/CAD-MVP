@@ -1,0 +1,615 @@
+{
+  "step_file": "/Users/akamazizi/Desktop/CAD-MVP/web/uploads/e04adf9ce53e4bc5a63638d7c625249b_ROTOR-201NAL-Z7.STEP",
+  "output_files": [],
+  "part_count": 296,
+  "views": [
+    "front",
+    "top",
+    "iso",
+    "right"
+  ],
+  "sheet_size": "A4",
+  "scale": 0.1,
+  "balloon_mappings": {
+    "PART_10452": 4,
+    "PART_12363": 5,
+    "PART_12827": 6,
+    "PART_13708": 35,
+    "PART_15619": 36,
+    "PART_16799": 40,
+    "PART_17316": 41,
+    "PART_17862": 45,
+    "PART_18330": 74,
+    "PART_20375": 75,
+    "PART_22086": 76,
+    "PART_24746": 78,
+    "PART_24796": 79,
+    "PART_2495": 82,
+    "PART_2598": 85,
+    "PART_27040": 86,
+    "PART_29657": 87,
+    "PART_30582": 91,
+    "PART_32008": 92,
+    "PART_32403": 93,
+    "PART_32658": 94,
+    "PART_32670": 95,
+    "PART_33085": 96,
+    "PART_33281": 99,
+    "PART_34888": 128,
+    "PART_35226": 129,
+    "PART_35647": 130,
+    "PART_35721": 131,
+    "PART_37690": 135,
+    "PART_39446": 136,
+    "PART_39923": 140,
+    "PART_40113": 141,
+    "PART_40777": 142,
+    "PART_41313": 143,
+    "PART_43890": 145,
+    "PART_44975": 146,
+    "PART_45000": 149,
+    "PART_46132": 151,
+    "PART_48557": 154,
+    "PART_51743": 155,
+    "PART_51882": 156,
+    "PART_52371": 157,
+    "PART_54706": 158,
+    "PART_55266": 160,
+    "PART_5741": 162,
+    "PART_60953": 163,
+    "PART_6200": 165,
+    "PART_63387": 169,
+    "PART_65752": 171,
+    "PART_66252": 174,
+    "PART_6736": 175,
+    "PART_67719": 177,
+    "PART_69837": 206,
+    "PART_7040": 207,
+    "PART_70960": 236,
+    "PART_74184": 240,
+    "PART_74935": 242,
+    "PART_77574": 271,
+    "PART_77590": 272,
+    "PART_78883": 276,
+    "PART_80077": 277,
+    "PART_81548": 279,
+    "PART_82565": 280,
+    "PART_82614": 282,
+    "PART_84020": 286,
+    "PART_86758": 287,
+    "PART_87158": 288,
+    "PART_9161": 289,
+    "PART_94425": 291,
+    "PART_96046": 292,
+    "PART_97883": 294,
+    "PART_98049": 295,
+    "PART_99232": 296
+  },
+  "bom": {
+    "columns": [
+      "Item",
+      "Part Number",
+      "Description",
+      "Qty",
+      "Material"
+    ],
+    "rows": [
+      {
+        "item": 4,
+        "part_number": "PART_10452",
+        "description": "Lame1",
+        "quantity": 4,
+        "material": "N/A"
+      },
+      {
+        "item": 5,
+        "part_number": "PART_12363",
+        "description": "Pi\u78a5200",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 6,
+        "part_number": "PART_12827",
+        "description": "levier100b_Seconde occurrence",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 35,
+        "part_number": "PART_13708",
+        "description": "Y-axis",
+        "quantity": 29,
+        "material": "N/A"
+      },
+      {
+        "item": 36,
+        "part_number": "PART_15619",
+        "description": "ROTOR-011",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 40,
+        "part_number": "PART_16799",
+        "description": "But\u88f2",
+        "quantity": 4,
+        "material": "None"
+      },
+      {
+        "item": 41,
+        "part_number": "PART_17316",
+        "description": "Pi\u78a5201",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 45,
+        "part_number": "PART_17862",
+        "description": "But\u88f1",
+        "quantity": 4,
+        "material": "N/A"
+      },
+      {
+        "item": 74,
+        "part_number": "PART_18330",
+        "description": "X-axis",
+        "quantity": 29,
+        "material": "N/A"
+      },
+      {
+        "item": 75,
+        "part_number": "PART_20375",
+        "description": "levier211",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 76,
+        "part_number": "PART_22086",
+        "description": "ROTOR-201NAL-Z7",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 78,
+        "part_number": "PART_24746",
+        "description": "LAME1",
+        "quantity": 2,
+        "material": "None"
+      },
+      {
+        "item": 79,
+        "part_number": "PART_24796",
+        "description": "p2-act_RNZ009",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 82,
+        "part_number": "PART_2495",
+        "description": "levier100a",
+        "quantity": 3,
+        "material": "N/A"
+      },
+      {
+        "item": 85,
+        "part_number": "PART_2598",
+        "description": "levier100b001",
+        "quantity": 3,
+        "material": "N/A"
+      },
+      {
+        "item": 86,
+        "part_number": "PART_27040",
+        "description": "levier100b_Seconde occurrence001",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 87,
+        "part_number": "PART_29657",
+        "description": "BIELLE101A_type002",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 91,
+        "part_number": "PART_30582",
+        "description": "Lame11",
+        "quantity": 4,
+        "material": "N/A"
+      },
+      {
+        "item": 92,
+        "part_number": "PART_32008",
+        "description": "SPHERE2",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 93,
+        "part_number": "PART_32403",
+        "description": "MANCHE-201",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 94,
+        "part_number": "PART_32658",
+        "description": "levier212",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 95,
+        "part_number": "PART_32670",
+        "description": "Arbre1",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 96,
+        "part_number": "PART_33085",
+        "description": "BIELLE101A",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 99,
+        "part_number": "PART_33281",
+        "description": "p1-act_RNZ7",
+        "quantity": 3,
+        "material": "N/A"
+      },
+      {
+        "item": 128,
+        "part_number": "PART_34888",
+        "description": "Z-axis",
+        "quantity": 29,
+        "material": "N/A"
+      },
+      {
+        "item": 129,
+        "part_number": "PART_35226",
+        "description": "ROTOR-10",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 130,
+        "part_number": "PART_35647",
+        "description": "MANCHE-203",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 131,
+        "part_number": "PART_35721",
+        "description": "Noyeau004",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 135,
+        "part_number": "PART_37690",
+        "description": "But\u88f20",
+        "quantity": 4,
+        "material": "N/A"
+      },
+      {
+        "item": 136,
+        "part_number": "PART_39446",
+        "description": "MANCHE-202",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 140,
+        "part_number": "PART_39923",
+        "description": "Levier1",
+        "quantity": 4,
+        "material": "N/A"
+      },
+      {
+        "item": 141,
+        "part_number": "PART_40113",
+        "description": "Noyeau002",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 142,
+        "part_number": "PART_40777",
+        "description": "actionneur100_RNZ7",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 143,
+        "part_number": "PART_41313",
+        "description": "Noyeau1",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 145,
+        "part_number": "PART_43890",
+        "description": "rotule-B101A",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 146,
+        "part_number": "PART_44975",
+        "description": "p1-PLATEAU_201",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 149,
+        "part_number": "PART_45000",
+        "description": "levier100b",
+        "quantity": 3,
+        "material": "N/A"
+      },
+      {
+        "item": 151,
+        "part_number": "PART_46132",
+        "description": "Moyeux100",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 154,
+        "part_number": "PART_48557",
+        "description": "levier100",
+        "quantity": 3,
+        "material": "N/A"
+      },
+      {
+        "item": 155,
+        "part_number": "PART_51743",
+        "description": "levier201",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 156,
+        "part_number": "PART_51882",
+        "description": "PALIER-1",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 157,
+        "part_number": "PART_52371",
+        "description": "Pi\u78a51",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 158,
+        "part_number": "PART_54706",
+        "description": "PALIER-201",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 160,
+        "part_number": "PART_55266",
+        "description": "rotule-B101A004",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 162,
+        "part_number": "PART_5741",
+        "description": "levier100b_Premi\u008are occurrence",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 163,
+        "part_number": "PART_60953",
+        "description": "p2-act_RNZ008",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 165,
+        "part_number": "PART_6200",
+        "description": "LAME002",
+        "quantity": 2,
+        "material": "None"
+      },
+      {
+        "item": 169,
+        "part_number": "PART_63387",
+        "description": "But\u88f22",
+        "quantity": 4,
+        "material": "N/A"
+      },
+      {
+        "item": 171,
+        "part_number": "PART_65752",
+        "description": "bielle101A",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 174,
+        "part_number": "PART_66252",
+        "description": "p3-act_RNZ7",
+        "quantity": 3,
+        "material": "N/A"
+      },
+      {
+        "item": 175,
+        "part_number": "PART_6736",
+        "description": "BIELLE101A_type1",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 177,
+        "part_number": "PART_67719",
+        "description": "bielle101A_type1",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 206,
+        "part_number": "PART_69837",
+        "description": "YZ-plane",
+        "quantity": 29,
+        "material": "N/A"
+      },
+      {
+        "item": 207,
+        "part_number": "PART_7040",
+        "description": "actionneur100_RNZ008",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 236,
+        "part_number": "PART_70960",
+        "description": "XZ-plane",
+        "quantity": 29,
+        "material": "N/A"
+      },
+      {
+        "item": 240,
+        "part_number": "PART_74184",
+        "description": "Manche100",
+        "quantity": 4,
+        "material": "N/A"
+      },
+      {
+        "item": 242,
+        "part_number": "PART_74935",
+        "description": "rotule-B101A001",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 271,
+        "part_number": "PART_77574",
+        "description": "XY-plane",
+        "quantity": 29,
+        "material": "N/A"
+      },
+      {
+        "item": 272,
+        "part_number": "PART_77590",
+        "description": "p2-act_RNZ7",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 276,
+        "part_number": "PART_78883",
+        "description": "Manche101",
+        "quantity": 4,
+        "material": "N/A"
+      },
+      {
+        "item": 277,
+        "part_number": "PART_80077",
+        "description": "levier210",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 279,
+        "part_number": "PART_81548",
+        "description": "levier100_Premi\u008are occurrence",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 280,
+        "part_number": "PART_82565",
+        "description": "BIELLE101A001",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 282,
+        "part_number": "PART_82614",
+        "description": "rotule-B101A005",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 286,
+        "part_number": "PART_84020",
+        "description": "But\u88f21",
+        "quantity": 4,
+        "material": "N/A"
+      },
+      {
+        "item": 287,
+        "part_number": "PART_86758",
+        "description": "Noyeau2",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 288,
+        "part_number": "PART_87158",
+        "description": "Pi\u78a5203",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 289,
+        "part_number": "PART_9161",
+        "description": "Noyeau003",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 291,
+        "part_number": "PART_94425",
+        "description": "but\u88edsphere002",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 292,
+        "part_number": "PART_96046",
+        "description": "MANCHE-204",
+        "quantity": 1,
+        "material": "None"
+      },
+      {
+        "item": 294,
+        "part_number": "PART_97883",
+        "description": "but\u88edsphere1",
+        "quantity": 2,
+        "material": "N/A"
+      },
+      {
+        "item": 295,
+        "part_number": "PART_98049",
+        "description": "Pi\u78a5202",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 296,
+        "part_number": "PART_99232",
+        "description": "actionneur100_RNZ009",
+        "quantity": 1,
+        "material": "None"
+      }
+    ]
+  },
+  "qa": {
+    "status": "skip",
+    "issues": []
+  },
+  "export_errors": []
+}
