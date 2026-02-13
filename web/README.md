@@ -25,6 +25,7 @@ Go to **http://localhost:5173** in your browser.
 
 - Upload a `.step` or `.stp` file (drag & drop or file picker)
 - Click **Process** and wait for the pipeline + snapshot (and RAG index) to finish
+- Generate an engineering report with insights, BOM, and health analysis
 - Use the chat to ask questions about the assembly (English or Swedish)
 
 ## API
@@ -33,6 +34,8 @@ Go to **http://localhost:5173** in your browser.
 |----------|--------|-------------|
 | `/api/assemblies` | GET | List assemblies (from `cad_view_agents/output/*_snapshot.json`) |
 | `/api/assemblies/upload` | POST | Multipart `file` (STEP); runs pipeline; returns `{ assembly_id, snapshot_path }` |
+| `/api/assemblies/report` | POST | Body `{ assembly_id, format: "pdf"\|"json" }`; returns PDF file or JSON report |
+| `/api/assemblies/{assembly_id}/report` | GET | Get report metadata (paths, generated_at) if exists |
 | `/api/assemblies/ask` | POST | Body `{ assembly_id, question }`; returns `{ answer, facts, sources }` |
 
 The backend runs the pipeline via `cad_view_agents/run_pipeline.sh` and RAG via `python3 -m rag ask … --json` from `cad_view_agents/`.

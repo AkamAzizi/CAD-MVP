@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { ChatPanel } from './ChatPanel'
 import { UploadCard } from './UploadCard'
+import { ReportPanel } from './ReportPanel'
 
 const API_BASE = '/api'
 
@@ -14,12 +15,16 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [existingAssemblies, setExistingAssemblies] = useState<Assembly[]>([])
 
-  useEffect(() => {
+  const refreshAssemblies = useCallback(() => {
     fetch(`${API_BASE}/assemblies`)
       .then((r) => r.ok ? r.json() : { assemblies: [] })
       .then((data) => setExistingAssemblies(data.assemblies || []))
       .catch(() => setExistingAssemblies([]))
   }, [])
+
+  useEffect(() => {
+    refreshAssemblies()
+  }, [refreshAssemblies])
 
   const onReady = useCallback((id: string) => {
     setAssemblyId(id)
@@ -54,15 +59,45 @@ export default function App() {
           <p className="existing-label">Eller välj befintlig assembly:</p>
           <div className="existing-buttons">
             {existingAssemblies.map((a) => (
-              <button
-                key={a.assembly_id}
-                type="button"
-                className="btn btn-outline"
-                title={a.assembly_id}
-                onClick={() => onReady(a.assembly_id)}
-              >
-                {a.label || a.assembly_id}
-              </button>
+              <div key={a.assembly_id} className="assembly-item">
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  title={a.assembly_id}
+                  onClick={() => onReady(a.assembly_id)}
+                >
+                  {a.label || a.assembly_id}
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-delete"
+                  title={`Delete ${a.label || a.assembly_id}`}
+                  onClick={async (e) => {
+                    e.stopPropagation()
+                    if (confirm(`Delete assembly "${a.label || a.assembly_id}"? This cannot be undone.`)) {
+                      try {
+                        const res = await fetch(`${API_BASE}/assemblies/${a.assembly_id}`, {
+                          method: 'DELETE',
+                        })
+                        if (res.ok) {
+                          refreshAssemblies()
+                          // If the deleted assembly was selected, reset
+                          if (assemblyId === a.assembly_id) {
+                            onReset()
+                          }
+                        } else {
+                          const text = await res.text()
+                          alert(`Failed to delete: ${text}`)
+                        }
+                      } catch (err) {
+                        alert(`Error deleting assembly: ${err instanceof Error ? err.message : String(err)}`)
+                      }
+                    }
+                  }}
+                >
+                  ×
+                </button>
+              </div>
             ))}
           </div>
         </div>
@@ -75,6 +110,7 @@ export default function App() {
       {status === 'ready' && assemblyId && (
         <>
           <div className="assembly-id">Assembly ID: {assemblyId}</div>
+          <ReportPanel assemblyId={assemblyId} />
           <ChatPanel assemblyId={assemblyId} />
         </>
       )}

@@ -22,10 +22,21 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
 
   const handleFile = useCallback((f: File | null) => {
     const ok = f && /\.(step|stp)$/i.test(f.name)
-    if (ok) setFile(f)
-    else if (f) setFile(null)
-    else setFile(null)
-  }, [])
+    if (ok) {
+      setFile(f)
+      // Reset error state when a valid file is selected
+      if (status === 'error') {
+        setStatus('idle')
+        setStatusText('')
+      }
+    } else if (f) {
+      setFile(null)
+      setStatus('error')
+      setStatusText('Invalid file type. Please select a .step or .stp file.')
+    } else {
+      setFile(null)
+    }
+  }, [status])
 
   const onDrop = useCallback(
     (e: React.DragEvent) => {
@@ -75,17 +86,18 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
         body: form,
       })
       const text = await res.text()
-        if (!res.ok) {
-          let detail = text
-          try {
-            const j = JSON.parse(text)
-            const d = j.detail
-            detail = Array.isArray(d) ? d.map((x: { msg?: string }) => x.msg ?? JSON.stringify(x)).join(' ') : (d ?? text)
-          } catch {
-            // use raw text
-          }
-          onError(detail)
+      if (!res.ok) {
+        let detail = text
+        try {
+          const j = JSON.parse(text)
+          const d = j.detail
+          detail = Array.isArray(d) ? d.map((x: { msg?: string }) => x.msg ?? JSON.stringify(x)).join(' ') : (d ?? text)
+        } catch {
+          // use raw text
+        }
+        setStatus('error')
         setStatusText('')
+        onError(detail)
         return
       }
       const data = JSON.parse(text) as { assembly_id: string; snapshot_path?: string }
@@ -93,8 +105,9 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
       onReady(data.assembly_id)
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e)
-      onError(msg)
+      setStatus('error')
       setStatusText('')
+      onError(msg)
     }
   }, [file, onReady, onError])
 

@@ -8,7 +8,8 @@ CAD-MVP converts 3D CAD assemblies (STEP files) into 2D technical drawings with 
 
 - **Pipeline:** STEP → Import → Part Tree → View Selection → Layout → TechDraw → BOM & Balloons → PDF/DXF
 - **RAG:** Assembly Snapshot + Intent Router → structured answers (headline, facts, sources)
-- **Web UI:** Upload STEP, process, chat about the assembly
+- **Engineering Report Generator:** Creates PDF and JSON reports with rules-based insights, complexity scoring, and health checks
+- **Web UI:** Upload STEP, process, generate reports, chat about the assembly
 
 ## Quick Start
 
@@ -45,7 +46,8 @@ npm run dev
 1. Open **http://localhost:5173**
 2. Upload a `.step` or `.stp` file (or choose an existing assembly)
 3. Click **Process** and wait for the pipeline to finish
-4. Ask questions in the chat (e.g. "How many parts?", "Which part is largest?", "What are the next steps?")
+4. Generate an engineering report with insights and health analysis
+5. Ask questions in the chat (e.g. "How many parts?", "Which part is largest?", "What are the next steps?")
 
 ## Project Structure
 
@@ -76,6 +78,8 @@ CAD-MVP/
 |----------|-------------|
 | `GET /api/assemblies` | List assemblies |
 | `POST /api/assemblies/upload` | Upload STEP, run pipeline, return `assembly_id` |
+| `POST /api/assemblies/report` | Generate report: `{ assembly_id, format: "pdf"\|"json" }` → PDF file or JSON |
+| `GET /api/assemblies/{assembly_id}/report` | Get report metadata if exists |
 | `POST /api/assemblies/ask` | Ask RAG: `{ assembly_id, question }` → `{ answer, facts, sources }` |
 
 ## Example Questions (Engineer Copilot)

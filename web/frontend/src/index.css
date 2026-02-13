@@ -135,6 +135,27 @@ h1 {
   gap: 0.5rem;
 }
 
+.assembly-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-delete {
+  background: transparent;
+  color: var(--error);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.5rem;
+  font-size: 1.2rem;
+  line-height: 1;
+  min-width: auto;
+}
+
+.btn-delete:hover {
+  background: rgba(248, 81, 73, 0.1);
+  border-color: var(--error);
+}
+
 .status {
   font-size: 0.85rem;
   color: var(--muted);
@@ -322,4 +343,119 @@ input[type="file"] {
 @keyframes pulse {
   0%, 100% { opacity: 0.6; }
   50% { opacity: 1; }
+}
+
+/* Report Panel */
+.report-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.report-panel h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.report-generate {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.report-generate p {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.report-loading {
+  text-align: center;
+  padding: 1rem 0;
+  color: var(--muted);
+}
+
+.report-summary {
+  margin-top: 1rem;
+}
+
+.report-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.metric {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+.metric-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.report-insights,
+.report-warnings {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.report-insights h3,
+.report-warnings h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.report-insights ul,
+.report-warnings ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style-type: disc;
+}
+
+.report-insights li {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+}
+
+.insight-info {
+  color: var(--accent);
+}
+
+.insight-warn {
+  color: #f39c12;
+}
+
+.insight-risk {
+  color: var(--error);
+}
+
+.report-warnings li {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.report-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
 }

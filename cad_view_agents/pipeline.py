@@ -183,52 +183,67 @@ def run_pipeline(step_path: str, output_path: str, options: Dict) -> Dict:
         })
         print(f"  [OK] Sheet: {sheet_size.name}, Scale: {scale}")
         
-        # Phase 4: TechDraw Generation
-        print("[6/8] Generating TechDraw views...")
-        techdraw_agent = TechDrawAgent()
-        page = techdraw_agent.create_page(sheet_size)
+        # Check if we should skip TechDraw/export (demo mode - only snapshot + RAG)
+        skip_techdraw = options.get("skip_techdraw", True)  # Default to True for demo
         
-        if page is None:
-            print("  [WARN] TechDraw not available, using fallback exporters")
-        
-        # Create TechDraw views
+        techdraw_agent = None
+        page = None
         techdraw_views = []
-        for placement in view_placements:
-            view = techdraw_agent.create_view(page, placement, doc)
-            if view:
-                techdraw_views.append(view)
+        balloons = []
         
-        # Apply hidden lines
-        techdraw_agent.apply_hidden_lines(techdraw_views, options.get("hidden_line_style", "Dashed"))
-        print(f"  [OK] Created {len(techdraw_views)} TechDraw views")
+        if not skip_techdraw:
+            # Phase 4: TechDraw Generation
+            print("[6/8] Generating TechDraw views...")
+            techdraw_agent = TechDrawAgent()
+            page = techdraw_agent.create_page(sheet_size)
+            
+            if page is None:
+                print("  [WARN] TechDraw not available, using fallback exporters")
+            
+            # Create TechDraw views
+            for placement in view_placements:
+                view = techdraw_agent.create_view(page, placement, doc)
+                if view:
+                    techdraw_views.append(view)
+            
+            # Apply hidden lines
+            techdraw_agent.apply_hidden_lines(techdraw_views, options.get("hidden_line_style", "Dashed"))
+            print(f"  [OK] Created {len(techdraw_views)} TechDraw views")
+        else:
+            print("[6/8] Skipping TechDraw generation (demo mode)")
         
-        # Phase 5: BOM Generation (before balloons - needed for unique part count)
+        # Phase 5: BOM Generation (needed for snapshot)
         print("[7/8] Generating BOM...")
         bom_generator = BOMGenerator()
         balloon_engine = BalloonEngine()
         item_numbers = balloon_engine.assign_item_numbers(part_tree)
         part_metadata = bom_generator.extract_part_metadata(part_tree, item_numbers)
         bom_table = bom_generator.generate_table(part_metadata)
-        bom_position = bom_generator.place_table(sheet_size, bom_table)
-        techdraw_agent.add_bom_table(page, bom_table, bom_position)
+        
+        if not skip_techdraw and techdraw_agent and page:
+            bom_position = bom_generator.place_table(sheet_size, bom_table)
+            techdraw_agent.add_bom_table(page, bom_table, bom_position)
+        
         log(trace, "bom", {
             "part_count": len(part_metadata),
             "table_size": bom_generator.calculate_table_size(bom_table)
         })
         print(f"  [OK] Generated BOM with {len(part_metadata)} parts")
         
-        # Phase 6: Ballooning (using BOM metadata for unique parts only)
-        print("[8/8] Placing balloons...")
-        # Place balloons based on BOM rows (unique parts only)
+        # Phase 6: Ballooning (needed for snapshot metadata)
+        print("[8/8] Computing balloon assignments...")
+        # Compute balloon assignments (but don't place them if skipping TechDraw)
         balloons = balloon_engine.place_balloons(
             view_placements,
             part_tree,
             item_numbers,
             sheet_size,
-            bom_metadata=part_metadata  # Pass BOM metadata to place one balloon per unique part
+            bom_metadata=part_metadata
         )
         balloons = balloon_engine.route_leaders(balloons, view_placements)
-        techdraw_agent.add_balloons(page, balloons)
+        
+        if not skip_techdraw and techdraw_agent and page:
+            techdraw_agent.add_balloons(page, balloons)
         
         # Verify balloon count matches BOM row count
         expected_balloons = len(part_metadata)
@@ -239,9 +254,9 @@ def run_pipeline(step_path: str, output_path: str, options: Dict) -> Dict:
             "item_numbers": item_numbers
         })
         if placed_balloons == expected_balloons:
-            print(f"  [OK] Placed {placed_balloons} balloons (matches BOM rows)")
+            print(f"  [OK] Computed {placed_balloons} balloon assignments (matches BOM rows)")
         else:
-            print(f"  [WARN] Placed {placed_balloons} balloons (expected {expected_balloons} from BOM rows)")
+            print(f"  [WARN] Computed {placed_balloons} balloon assignments (expected {expected_balloons} from BOM rows)")
         
         # Save metadata + snapshot BEFORE export (so we have them even if export hangs)
         metadata_path = output_path + ".json" if not output_path.endswith((".pdf", ".dxf")) else output_path.rsplit(".", 1)[0] + ".json"
@@ -301,78 +316,81 @@ def run_pipeline(step_path: str, output_path: str, options: Dict) -> Dict:
                     print(f"  [OK] RAG index updated for {snapshot.get('assembly_id', '')}")
                 except Exception as rag_err:
                     print(f"  [WARN] RAG index skipped: {rag_err}")
-        print("  [INFO] Snapshot + RAG ready. Export may take a while (or hang in headless); you can Ctrl+C if needed.")
+        print("  [INFO] Snapshot + RAG ready.")
         
-        # Phase 7: Export
-        print("[Export] Exporting to PDF/DXF...")
+        # Phase 7: Export (skip if in demo mode)
         export_errors = []
-        
-        # Determine output format
-        try:
-            if output_path.endswith(".pdf"):
-                try:
-                    # Prepare metadata for export
-                    export_metadata = {
-                        "filename": os.path.basename(step_path),
-                        "sheet_size": sheet_size.name,
-                        "scale": scale,
-                        "views": [v[0].name for v in selected_views]
-                    }
-                    pdf_path = techdraw_agent.export_pdf(page, output_path, 
-                                                        view_placements, balloons, 
-                                                        bom_table, export_metadata,
-                                                        view_objects=techdraw_views)
-                    if pdf_path:
-                        artifacts.append(pdf_path)
-                        print(f"  [OK] Exported PDF: {pdf_path}")
-                except Exception as e:
-                    export_errors.append(f"PDF export failed: {e}")
-                    print(f"  [WARN] PDF export failed: {e}")
-            elif output_path.endswith(".dxf"):
-                try:
-                    dxf_path = techdraw_agent.export_dxf(page, output_path)
-                    if dxf_path:
-                        artifacts.append(dxf_path)
-                        print(f"  [OK] Exported DXF: {dxf_path}")
-                except Exception as e:
-                    export_errors.append(f"DXF export failed: {e}")
-                    print(f"  [WARN] DXF export failed: {e}")
-            else:
-                # Export both
-                try:
-                    # Prepare metadata for export
-                    export_metadata = {
-                        "filename": os.path.basename(step_path),
-                        "sheet_size": sheet_size.name,
-                        "scale": scale,
-                        "views": [v[0].name for v in selected_views]
-                    }
-                    pdf_path = techdraw_agent.export_pdf(page, output_path + ".pdf",
-                                                        view_placements, balloons, bom_table, export_metadata,
-                                                        view_objects=techdraw_views)
-                    if pdf_path:
-                        artifacts.append(pdf_path)
-                        print(f"  [OK] Exported PDF: {pdf_path}")
-                except Exception as e:
-                    export_errors.append(f"PDF export failed: {e}")
-                    print(f"  [WARN] PDF export failed: {e}")
-                
-                try:
-                    dxf_path = techdraw_agent.export_dxf(page, output_path + ".dxf")
-                    if dxf_path:
-                        artifacts.append(dxf_path)
-                        print(f"  [OK] Exported DXF: {dxf_path}")
-                except Exception as e:
-                    export_errors.append(f"DXF export failed: {e}")
-                    print(f"  [WARN] DXF export failed: {e}")
-        except Exception as e:
-            export_errors.append(str(e))
-            print(f"  [WARN] Export failed: {e}")
+        if skip_techdraw:
+            print("[Export] Skipping PDF/DXF export (demo mode - snapshot only)")
+            export_errors.append("Export skipped in demo mode")
+        else:
+            print("[Export] Exporting to PDF/DXF...")
+            # Determine output format
+            try:
+                if output_path.endswith(".pdf"):
+                    try:
+                        # Prepare metadata for export
+                        export_metadata = {
+                            "filename": os.path.basename(step_path),
+                            "sheet_size": sheet_size.name,
+                            "scale": scale,
+                            "views": [v[0].name for v in selected_views]
+                        }
+                        pdf_path = techdraw_agent.export_pdf(page, output_path, 
+                                                            view_placements, balloons, 
+                                                            bom_table, export_metadata,
+                                                            view_objects=techdraw_views)
+                        if pdf_path:
+                            artifacts.append(pdf_path)
+                            print(f"  [OK] Exported PDF: {pdf_path}")
+                    except Exception as e:
+                        export_errors.append(f"PDF export failed: {e}")
+                        print(f"  [WARN] PDF export failed: {e}")
+                elif output_path.endswith(".dxf"):
+                    try:
+                        dxf_path = techdraw_agent.export_dxf(page, output_path)
+                        if dxf_path:
+                            artifacts.append(dxf_path)
+                            print(f"  [OK] Exported DXF: {dxf_path}")
+                    except Exception as e:
+                        export_errors.append(f"DXF export failed: {e}")
+                        print(f"  [WARN] DXF export failed: {e}")
+                else:
+                    # Export both
+                    try:
+                        # Prepare metadata for export
+                        export_metadata = {
+                            "filename": os.path.basename(step_path),
+                            "sheet_size": sheet_size.name,
+                            "scale": scale,
+                            "views": [v[0].name for v in selected_views]
+                        }
+                        pdf_path = techdraw_agent.export_pdf(page, output_path + ".pdf",
+                                                            view_placements, balloons, bom_table, export_metadata,
+                                                            view_objects=techdraw_views)
+                        if pdf_path:
+                            artifacts.append(pdf_path)
+                            print(f"  [OK] Exported PDF: {pdf_path}")
+                    except Exception as e:
+                        export_errors.append(f"PDF export failed: {e}")
+                        print(f"  [WARN] PDF export failed: {e}")
+                    
+                    try:
+                        dxf_path = techdraw_agent.export_dxf(page, output_path + ".dxf")
+                        if dxf_path:
+                            artifacts.append(dxf_path)
+                            print(f"  [OK] Exported DXF: {dxf_path}")
+                    except Exception as e:
+                        export_errors.append(f"DXF export failed: {e}")
+                        print(f"  [WARN] DXF export failed: {e}")
+            except Exception as e:
+                export_errors.append(str(e))
+                print(f"  [WARN] Export failed: {e}")
         
         log(trace, "export", {"artifacts": artifacts, "errors": export_errors})
         
-        # Phase 8: QA (only if we have artifacts)
-        if artifacts:
+        # Phase 8: QA (only if we have artifacts and not in demo mode)
+        if artifacts and not skip_techdraw:
             print("[QA] Running quality assurance...")
             qa_result = qa_agent.run(artifacts)
             log(trace, "qa_agent", qa_result)
@@ -381,7 +399,7 @@ def run_pipeline(step_path: str, output_path: str, options: Dict) -> Dict:
             else:
                 print(f"  [WARN] QA issues: {qa_result.get('issues', [])}")
         else:
-            print("[QA] Skipped (no artifacts to validate)")
+            print("[QA] Skipped (demo mode or no artifacts to validate)")
         
         # Update metadata with export result (artifacts, qa, export_errors)
         metadata["output_files"] = artifacts
@@ -496,7 +514,9 @@ def main():
         "scale": args.scale,
         "max_views": args.max_views,
         "hidden_line_style": args.hidden_line_style,
-        "use_ai": args.use_ai
+        "use_ai": args.use_ai,
+        "skip_techdraw": True,  # Default to True for demo (skip TechDraw/export)
+        "rag": True,  # Enable RAG indexing
     }
     
     # Run pipeline
