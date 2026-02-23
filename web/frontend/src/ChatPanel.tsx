@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { Card } from './components/Card'
+import { SectionHeader } from './components/SectionHeader'
 
 const API_BASE = '/api'
 
@@ -18,12 +20,12 @@ type ChatPanelProps = {
 
 // Example questions users can click to ask
 const EXAMPLE_QUESTIONS = [
-  "How many parts are in the assembly?",
-  "Which part is the largest?",
-  "Which view is best for a 2D drawing?",
-  "Which parts repeat the most?",
-  "Are there any missing materials?",
-  "What are the next steps?",
+  "Hur många delar finns i assemblyn?",
+  "Vilken del är störst?",
+  "Vilka delar upprepas mest?",
+  "Saknas material på några delar?",
+  "Vad är nästa steg?",
+  "Vilken vy är bäst för 2D-ritning?",
 ]
 
 export function ChatPanel({ assemblyId }: ChatPanelProps) {
@@ -31,6 +33,7 @@ export function ChatPanel({ assemblyId }: ChatPanelProps) {
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [expandedHistory, setExpandedHistory] = useState<Set<number>>(new Set())
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
@@ -68,7 +71,7 @@ export function ChatPanel({ assemblyId }: ChatPanelProps) {
       try {
         data = JSON.parse(text) as { answer?: string; facts?: string[]; sources?: string[] }
       } catch {
-        setError('Could not parse response from server.')
+        setError('Kunde inte tolka svar från servern.')
         setMessages((prev) => prev.slice(0, -1))
         setLoading(false)
         return
@@ -104,6 +107,26 @@ export function ChatPanel({ assemblyId }: ChatPanelProps) {
     sendQuestion(question)
   }, [loading, sendQuestion])
 
+  // Clear chat
+  const clearChat = useCallback(() => {
+    setMessages([])
+    setExpandedHistory(new Set())
+    setError(null)
+  }, [])
+
+  // Toggle history expansion
+  const toggleHistory = useCallback((index: number) => {
+    setExpandedHistory((prev) => {
+      const next = new Set(prev)
+      if (next.has(index)) {
+        next.delete(index)
+      } else {
+        next.add(index)
+      }
+      return next
+    })
+  }, [])
+
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
@@ -118,52 +141,155 @@ export function ChatPanel({ assemblyId }: ChatPanelProps) {
     [send]
   )
 
+  // Get recent messages (last 3 Q&A pairs = 6 messages) for history
+  const historyThreshold = 6
+  const hasHistory = messages.length > historyThreshold
+  const recentMessages = hasHistory ? messages.slice(-historyThreshold) : []
+  const currentMessages = hasHistory ? messages.slice(0, -historyThreshold) : messages
+
   return (
-    <div className="chat-panel">
-      <h2>Assembly Q&A</h2>
+    <Card>
+      <SectionHeader
+        title="Intelligent Q&A"
+        subtitle="Spårbara AI-svar baserat på assembly-analys, BOM och strukturerad metadata"
+      />
       <div className="messages">
         {messages.length === 0 && !loading && (
-          <p className="empty-prompt">Ask a question about this assembly below.</p>
+          <div className="empty-state-chat">
+            <p>Ställ en fråga om assemblyn nedan.</p>
+            <ul>
+              <li>BOM-analys</li>
+              <li>Rapport med insikter</li>
+              <li>Q&A med part-referenser</li>
+            </ul>
+          </div>
         )}
-        {loading && <p className="details loading-indicator">Searching...</p>}
-        {messages.map((m, i) => (
+        {loading && <p className="details loading-indicator">Söker…</p>}
+        {currentMessages.map((m, i) => (
           <div key={i} className={`message ${m.role}`}>
             {m.role === 'user' && m.question && <p>{m.question}</p>}
             {m.role === 'assistant' && (
-              <>
-                <div className="answer">{m.answer || '(No answer)'}</div>
-                {(m.facts?.length ?? 0) > 0 && (
-                  <details className="details">
-                    <summary>Facts ({m.facts!.length})</summary>
-                    <ul>
-                      {m.facts!.map((f, j) => (
-                        <li key={j}>{f}</li>
-                      ))}
-                    </ul>
-                  </details>
-                )}
-                {(m.sources?.length ?? 0) > 0 && (
-                  <details className="details">
-                    <summary>Sources ({m.sources!.length})</summary>
-                    <ul>
-                      {m.sources!.map((s, j) => (
-                        <li key={j}>
-                          {typeof s === 'string' 
-                            ? s 
-                            : (s.path || [s.chunk_type, s.field].filter(Boolean).join(' · ') || JSON.stringify(s))}
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
-                )}
-              </>
+              <div className="answer-card">
+                <div className="answer-card-header">
+                  <h5>AI-analys</h5>
+                  <span className="traceable-badge">Spårbart svar</span>
+                </div>
+                <div className="answer-body">{m.answer || '(Inget svar)'}</div>
+                <div className="answer-underlag">
+                  <strong>Underlag</strong>
+                  <ul>
+                    {(m.facts?.length ?? 0) > 0 && (
+                      <>
+                        {m.facts!.map((f, j) => {
+                          // Extract meaningful data from facts
+                          const factText = f
+                          if (factText.includes('unique') || factText.includes('unika')) {
+                            const match = factText.match(/(\d+)/)
+                            if (match) {
+                              return <li key={j}>Unika delar: {match[1]}</li>
+                            }
+                          }
+                          if (factText.includes('total') || factText.includes('totalt') || factText.includes('instances')) {
+                            const match = factText.match(/(\d+)/)
+                            if (match) {
+                              return <li key={j}>Totalt antal instanser: {match[1]}</li>
+                            }
+                          }
+                          return null
+                        })}
+                      </>
+                    )}
+                    <li>Datakällor: Assembly-översikt + rapportanalys</li>
+                  </ul>
+                </div>
+              </div>
             )}
           </div>
         ))}
+        {hasHistory && recentMessages.length > 0 && (
+          <div className="chat-history">
+            <div className="chat-history-header">
+              <h4>Senaste frågor & svar</h4>
+              <button
+                type="button"
+                className="btn-clear-chat"
+                onClick={clearChat}
+              >
+                Rensa chat
+              </button>
+            </div>
+            {recentMessages.map((m, i) => {
+              const globalIndex = currentMessages.length + i
+              const isExpanded = expandedHistory.has(globalIndex)
+              const isUser = m.role === 'user'
+              
+              return (
+                <details
+                  key={globalIndex}
+                  className="history-item"
+                  open={isExpanded}
+                  onToggle={() => toggleHistory(globalIndex)}
+                >
+                  <summary className={`history-summary ${isUser ? 'user' : 'assistant'}`}>
+                    {isUser ? m.question : 'AI-analys'}
+                  </summary>
+                  {isUser ? (
+                    <div className="history-content">{m.question}</div>
+                  ) : (
+                    <div className="answer-card">
+                      <div className="answer-card-header">
+                        <h5>AI-analys</h5>
+                        <span className="traceable-badge">Spårbart svar</span>
+                      </div>
+                      <div className="answer-body">{m.answer || '(Inget svar)'}</div>
+                      <div className="answer-underlag">
+                        <strong>Underlag</strong>
+                        <ul>
+                          {(m.facts?.length ?? 0) > 0 && (
+                            <>
+                              {m.facts!.map((f, j) => {
+                                const factText = f
+                                if (factText.includes('unique') || factText.includes('unika')) {
+                                  const match = factText.match(/(\d+)/)
+                                  if (match) {
+                                    return <li key={j}>Unika delar: {match[1]}</li>
+                                  }
+                                }
+                                if (factText.includes('total') || factText.includes('totalt') || factText.includes('instances')) {
+                                  const match = factText.match(/(\d+)/)
+                                  if (match) {
+                                    return <li key={j}>Totalt antal instanser: {match[1]}</li>
+                                  }
+                                }
+                                return null
+                              })}
+                            </>
+                          )}
+                          <li>Datakällor: Assembly-översikt + rapportanalys</li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                </details>
+              )
+            })}
+          </div>
+        )}
+        {!hasHistory && messages.length > 0 && (
+          <div className="chat-history-header">
+            <button
+              type="button"
+              className="btn-clear-chat"
+              onClick={clearChat}
+            >
+              Rensa chat
+            </button>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
-      <div className="example-questions-bar" aria-label="Suggested questions">
-        <span className="example-questions-label">Try asking:</span>
+      <div className="example-questions-bar" aria-label="Föreslagna frågor">
+        <span className="example-questions-label">Prova att fråga:</span>
         <div className="example-questions">
           {EXAMPLE_QUESTIONS.map((q, i) => (
             <button
@@ -182,17 +308,17 @@ export function ChatPanel({ assemblyId }: ChatPanelProps) {
       <div className="chat-input-row">
         <input
           type="text"
-          placeholder="Ask about the assembly..."
+          placeholder="Fråga om assemblyn…"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKeyDown}
           disabled={loading}
         />
         <button type="button" className="btn btn-primary" disabled={loading || !input.trim()} onClick={send}>
-          {loading ? '...' : 'Send'}
+          {loading ? 'Svarar…' : 'Skicka fråga'}
         </button>
       </div>
       {error && <div className="error-box">{error}</div>}
-    </div>
+    </Card>
   )
 }

@@ -1,8 +1,8 @@
 {
   "snapshot_version": "1.0",
-  "assembly_id": "asm_ROTOR-201NAL-Z7_58c4eea1",
-  "timestamp": "2026-02-01T12:45:39.141714+00:00",
-  "source_file": "C:\\Users\\akam3\\Desktop\\assemblies\\ROTOR-201NAL-Z7.STEP",
+  "assembly_id": "asm_2a7528879e154e79b3234bdb4747f0_289ecc39",
+  "timestamp": "2026-02-23T13:16:26.408265+00:00",
+  "source_file": "C:\\Users\\akam3\\CAD-MVP\\web\\uploads\\2a7528879e154e79b3234bdb4747f0b8_testar-process.STEP",
   "source_file_hash": "sha256:0471f5652ce63f812a63ac47e377269af843b0ed151ee5e5f937b180046aeb5b",
   "overview": {
     "parts_count_total": 296,
@@ -2843,7 +2843,7 @@
   "pipeline_artifacts": {
     "pdf_path": null,
     "dxf_path": null,
-    "metadata_json_path": "output\\test1.json",
+    "metadata_json_path": "output\\2a7528879e154e79b3234bdb4747f0b8_testar-process.json",
     "view_svg_paths": [],
     "selected_views": [
       "front",
@@ -2860,5 +2860,7 @@
       "right": 0.88
     }
   },
-  "validation_errors": []
+  "validation_errors": [
+    "Worker failed with exit code 1. Check output\\asm_2a7528879e154e79b3234bdb4747f0_289ecc39\\drawing\\render.log"
+  ]
 }

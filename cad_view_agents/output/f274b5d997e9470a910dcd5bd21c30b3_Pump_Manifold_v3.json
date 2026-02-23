@@ -1,11 +1,9 @@
 {
-  "step_file": "/Users/akamazizi/Desktop/CAD-MVP/web/uploads/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.step",
+  "step_file": "..\\web\\uploads\\f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.step",
   "output_files": [
-    "output/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.json",
-    "output/asm_f274b5d997e9470a910dcd5bd21c30_04ba3839_snapshot.json",
-    "output/asm_f274b5d997e9470a910dcd5bd21c30_04ba3839_snapshot.md",
-    "output/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.pdf",
-    "output/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.dxf"
+    "output\\f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.json",
+    "output\\asm_f274b5d997e9470a910dcd5bd21c30_97d4ea28_snapshot.json",
+    "output\\asm_f274b5d997e9470a910dcd5bd21c30_97d4ea28_snapshot.md"
   ],
   "part_count": 1,
   "views": [
@@ -40,10 +38,12 @@
   "qa": {
     "status": "fail",
     "issues": [
-      "Artifact too small (691 bytes): output/f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.json"
+      "Artifact too small (824 bytes): output\\f274b5d997e9470a910dcd5bd21c30b3_Pump_Manifold_v3.json"
     ]
   },
-  "export_errors": [],
-  "snapshot_path": "output/asm_f274b5d997e9470a910dcd5bd21c30_04ba3839_snapshot.json",
-  "assembly_id": "asm_f274b5d997e9470a910dcd5bd21c30_04ba3839"
+  "export_errors": [
+    "Worker failed with exit code 1. Check output\\asm_f274b5d997e9470a910dcd5bd21c30_97d4ea28\\drawing\\render.log"
+  ],
+  "snapshot_path": "output\\asm_f274b5d997e9470a910dcd5bd21c30_97d4ea28_snapshot.json",
+  "assembly_id": "asm_f274b5d997e9470a910dcd5bd21c30_97d4ea28"
 }

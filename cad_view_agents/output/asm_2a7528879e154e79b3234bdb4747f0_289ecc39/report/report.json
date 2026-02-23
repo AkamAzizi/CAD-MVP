@@ -1,0 +1,1094 @@
+{
+  "meta": {
+    "assembly_id": "asm_2a7528879e154e79b3234bdb4747f0_289ecc39",
+    "file_name": "2a7528879e154e79b3234bdb4747f0b8_testar-process.STEP",
+    "generated_at_iso": "2026-02-23T14:22:03.552468",
+    "version": "1.0",
+    "source_snapshot_path": "C:\\Users\\akam3\\CAD-MVP\\cad_view_agents\\output\\asm_2a7528879e154e79b3234bdb4747f0_289ecc39_snapshot.json"
+  },
+  "overview": {
+    "total_parts": 122,
+    "unique_parts": 67,
+    "repeated_parts": 55,
+    "bbox_mm": null,
+    "complexity_score_0_100": 70
+  },
+  "bom": [
+    {
+      "item_no": 4,
+      "part_name": "Lame1",
+      "qty": 4,
+      "material": null,
+      "volume_mm3": 400280.8463958838,
+      "bbox_mm": {
+        "x": 251.48172299670617,
+        "y": 8.000000000000304,
+        "z": 407.9187181851933
+      },
+      "category": null
+    },
+    {
+      "item_no": 5,
+      "part_name": "Pi碥200",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 624622.548204421,
+      "bbox_mm": {
+        "x": 420.6693454130934,
+        "y": 91.22541289885223,
+        "z": 356.969619041098
+      },
+      "category": null
+    },
+    {
+      "item_no": 6,
+      "part_name": "levier100b_Seconde occurrence",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 560.5742212955325,
+      "bbox_mm": {
+        "x": 15.556349186104043,
+        "y": 19.0,
+        "z": 15.556349186104043
+      },
+      "category": null
+    },
+    {
+      "item_no": 36,
+      "part_name": "ROTOR-011",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 2405908.7502330323,
+      "bbox_mm": {
+        "x": 605.0600096599882,
+        "y": 60.00000000000023,
+        "z": 942.3576163677762
+      },
+      "category": null
+    },
+    {
+      "item_no": 40,
+      "part_name": "But裲",
+      "qty": 4,
+      "material": "None",
+      "volume_mm3": 403621.1661789036,
+      "bbox_mm": {
+        "x": 45.00000000000006,
+        "y": 139.99999999999997,
+        "z": 120.00000000000003
+      },
+      "category": null
+    },
+    {
+      "item_no": 41,
+      "part_name": "Pi碥201",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 280683.9897679131,
+      "bbox_mm": {
+        "x": 214.00000000000003,
+        "y": 91.22541289885214,
+        "z": 214.00000000000003
+      },
+      "category": null
+    },
+    {
+      "item_no": 45,
+      "part_name": "But裱",
+      "qty": 4,
+      "material": null,
+      "volume_mm3": 184533.27773126317,
+      "bbox_mm": {
+        "x": 66.72387126161166,
+        "y": 80.0,
+        "z": 77.70104224099609
+      },
+      "category": null
+    },
+    {
+      "item_no": 75,
+      "part_name": "levier211",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 67116.97253108375,
+      "bbox_mm": {
+        "x": 73.73523868135835,
+        "y": 100.00000000000023,
+        "z": 74.52416773117453
+      },
+      "category": null
+    },
+    {
+      "item_no": 106,
+      "part_name": "LAME1",
+      "qty": 2,
+      "material": "None",
+      "volume_mm3": 458457.66103757656,
+      "bbox_mm": {
+        "x": 251.48172299670617,
+        "y": 29.999999999999993,
+        "z": 459.91871818519326
+      },
+      "category": null
+    },
+    {
+      "item_no": 107,
+      "part_name": "p2-act_RNZ009",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 95798.79399408241,
+      "bbox_mm": {
+        "x": 77.48808601249388,
+        "y": 228.74466538832735,
+        "z": 55.99764891454811
+      },
+      "category": null
+    },
+    {
+      "item_no": 110,
+      "part_name": "levier100a",
+      "qty": 3,
+      "material": null,
+      "volume_mm3": 5619.262059720942,
+      "bbox_mm": {
+        "x": 50.00000000000001,
+        "y": 12.000000000000004,
+        "z": 12.000000000000021
+      },
+      "category": null
+    },
+    {
+      "item_no": 113,
+      "part_name": "levier100b001",
+      "qty": 3,
+      "material": null,
+      "volume_mm3": 527.7875658030853,
+      "bbox_mm": {
+        "x": 6.0,
+        "y": 16.0,
+        "z": 16.0
+      },
+      "category": null
+    },
+    {
+      "item_no": 114,
+      "part_name": "levier100b_Seconde occurrence001",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 560.5742212955325,
+      "bbox_mm": {
+        "x": 15.556349186104143,
+        "y": 19.0,
+        "z": 15.556349186103972
+      },
+      "category": null
+    },
+    {
+      "item_no": 115,
+      "part_name": "ROTOR-201NAL-Z7",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 21374159.896618314,
+      "bbox_mm": {
+        "x": 1105.356166598433,
+        "y": 946.1535273835689,
+        "z": 1104.6424852085647
+      },
+      "category": null
+    },
+    {
+      "item_no": 116,
+      "part_name": "BIELLE101A_type002",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 88066.0574793505,
+      "bbox_mm": {
+        "x": 49.374055321034035,
+        "y": 203.85900202989012,
+        "z": 60.99011343568738
+      },
+      "category": null
+    },
+    {
+      "item_no": 120,
+      "part_name": "Lame11",
+      "qty": 4,
+      "material": null,
+      "volume_mm3": 58176.70956783388,
+      "bbox_mm": {
+        "x": 30.000000000000078,
+        "y": 29.999999999999993,
+        "z": 145.0
+      },
+      "category": null
+    },
+    {
+      "item_no": 121,
+      "part_name": "SPHERE2",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 1664168.459589239,
+      "bbox_mm": {
+        "x": 169.60000000000002,
+        "y": 222.93692539163615,
+        "z": 169.60000000000002
+      },
+      "category": null
+    },
+    {
+      "item_no": 122,
+      "part_name": "MANCHE-201",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 1534002.444616709,
+      "bbox_mm": {
+        "x": 392.64081715977244,
+        "y": 158.50375201280633,
+        "z": 457.2706313356105
+      },
+      "category": null
+    },
+    {
+      "item_no": 123,
+      "part_name": "levier212",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 67116.9725310838,
+      "bbox_mm": {
+        "x": 73.73523868135834,
+        "y": 100.00000000000006,
+        "z": 74.52416773117442
+      },
+      "category": null
+    },
+    {
+      "item_no": 124,
+      "part_name": "Arbre1",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 3019956.6001277957,
+      "bbox_mm": {
+        "x": 146.00000000000009,
+        "y": 892.0,
+        "z": 146.00000000000009
+      },
+      "category": null
+    },
+    {
+      "item_no": 125,
+      "part_name": "BIELLE101A",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 106378.97661352802,
+      "bbox_mm": {
+        "x": 63.46681753932401,
+        "y": 242.75798216285864,
+        "z": 47.746213655203235
+      },
+      "category": null
+    },
+    {
+      "item_no": 128,
+      "part_name": "p1-act_RNZ7",
+      "qty": 3,
+      "material": null,
+      "volume_mm3": 509752.4971792711,
+      "bbox_mm": {
+        "x": 80.0,
+        "y": 137.00000000000003,
+        "z": 80.00000000000006
+      },
+      "category": null
+    },
+    {
+      "item_no": 158,
+      "part_name": "ROTOR-10",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 2405908.7502330304,
+      "bbox_mm": {
+        "x": 942.3576163677747,
+        "y": 60.00000000000023,
+        "z": 605.0600096599901
+      },
+      "category": null
+    },
+    {
+      "item_no": 159,
+      "part_name": "MANCHE-203",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 1534002.444616712,
+      "bbox_mm": {
+        "x": 422.3745760655392,
+        "y": 151.30705476713388,
+        "z": 472.2504932950367
+      },
+      "category": null
+    },
+    {
+      "item_no": 160,
+      "part_name": "Noyeau004",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 4274.563059109865,
+      "bbox_mm": {
+        "x": 26.995689014324228,
+        "y": 25.000000000000007,
+        "z": 26.995689014324213
+      },
+      "category": null
+    },
+    {
+      "item_no": 193,
+      "part_name": "But裲0",
+      "qty": 4,
+      "material": null,
+      "volume_mm3": 203543.68356804026,
+      "bbox_mm": {
+        "x": 120.00000000000003,
+        "y": 139.99999999999997,
+        "z": 45.00000000000001
+      },
+      "category": null
+    },
+    {
+      "item_no": 194,
+      "part_name": "MANCHE-202",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 1534002.44461671,
+      "bbox_mm": {
+        "x": 458.9756405112503,
+        "y": 154.18336377433968,
+        "z": 398.84977204147714
+      },
+      "category": null
+    },
+    {
+      "item_no": 198,
+      "part_name": "Levier1",
+      "qty": 4,
+      "material": null,
+      "volume_mm3": 85062.41460485807,
+      "bbox_mm": {
+        "x": 50.000000000000014,
+        "y": 155.42468245269458,
+        "z": 126.22595264191644
+      },
+      "category": null
+    },
+    {
+      "item_no": 199,
+      "part_name": "Noyeau002",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 11948.00447771138,
+      "bbox_mm": {
+        "x": 34.392304845413435,
+        "y": 25.000000000000007,
+        "z": 48.30127018922187
+      },
+      "category": null
+    },
+    {
+      "item_no": 200,
+      "part_name": "actionneur100_RNZ7",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 595349.006330551,
+      "bbox_mm": {
+        "x": 121.05367815163711,
+        "y": 149.27389520743432,
+        "z": 150.82257870182502
+      },
+      "category": null
+    },
+    {
+      "item_no": 201,
+      "part_name": "Noyeau1",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 11948.004477711367,
+      "bbox_mm": {
+        "x": 34.39230484541292,
+        "y": 25.0,
+        "z": 48.301270189222095
+      },
+      "category": null
+    },
+    {
+      "item_no": 203,
+      "part_name": "rotule-B101A",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 16668.744113031895,
+      "bbox_mm": {
+        "x": 32.348255248528254,
+        "y": 35.75760227949499,
+        "z": 31.773539436136257
+      },
+      "category": null
+    },
+    {
+      "item_no": 204,
+      "part_name": "p1-PLATEAU_201",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 645686.6067461373,
+      "bbox_mm": {
+        "x": 236.56921938165323,
+        "y": 89.97741280701746,
+        "z": 273.1666049839532
+      },
+      "category": null
+    },
+    {
+      "item_no": 207,
+      "part_name": "levier100b",
+      "qty": 3,
+      "material": null,
+      "volume_mm3": 527.7875658030853,
+      "bbox_mm": {
+        "x": 6.0,
+        "y": 16.0,
+        "z": 16.0
+      },
+      "category": null
+    },
+    {
+      "item_no": 209,
+      "part_name": "Moyeux100",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 1408851.525178786,
+      "bbox_mm": {
+        "x": 181.6105717959581,
+        "y": 39.00000000000002,
+        "z": 450.00000000000006
+      },
+      "category": null
+    },
+    {
+      "item_no": 212,
+      "part_name": "levier100",
+      "qty": 3,
+      "material": null,
+      "volume_mm3": 5273.167286384261,
+      "bbox_mm": {
+        "x": 25.0,
+        "y": 25.0,
+        "z": 25.0
+      },
+      "category": null
+    },
+    {
+      "item_no": 213,
+      "part_name": "levier201",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 60220.46511724169,
+      "bbox_mm": {
+        "x": 63.075709247592556,
+        "y": 159.87397949777625,
+        "z": 64.96614619781505
+      },
+      "category": null
+    },
+    {
+      "item_no": 214,
+      "part_name": "PALIER-1",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 941153.446866982,
+      "bbox_mm": {
+        "x": 374.0637991194794,
+        "y": 170.0,
+        "z": 400.57365280075805
+      },
+      "category": null
+    },
+    {
+      "item_no": 215,
+      "part_name": "Pi碥1",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 691092.2061329181,
+      "bbox_mm": {
+        "x": 120.00000000000001,
+        "y": 400.0,
+        "z": 120.00000000000001
+      },
+      "category": null
+    },
+    {
+      "item_no": 216,
+      "part_name": "Pi碥202",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 599741.0894073306,
+      "bbox_mm": {
+        "x": 363.5823108872567,
+        "y": 29.011253885592495,
+        "z": 363.58231088725626
+      },
+      "category": null
+    },
+    {
+      "item_no": 218,
+      "part_name": "rotule-B101A004",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 16668.74411303188,
+      "bbox_mm": {
+        "x": 35.973281111898956,
+        "y": 34.99862835617735,
+        "z": 35.67927971783047
+      },
+      "category": null
+    },
+    {
+      "item_no": 220,
+      "part_name": "levier100b_Premire occurrence",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 320.3413581758944,
+      "bbox_mm": {
+        "x": 3.0000000000000018,
+        "y": 19.0,
+        "z": 19.0
+      },
+      "category": null
+    },
+    {
+      "item_no": 221,
+      "part_name": "p2-act_RNZ008",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 95798.7939940824,
+      "bbox_mm": {
+        "x": 42.0,
+        "y": 230.04456230349052,
+        "z": 72.7975579354972
+      },
+      "category": null
+    },
+    {
+      "item_no": 223,
+      "part_name": "LAME002",
+      "qty": 2,
+      "material": "None",
+      "volume_mm3": 458457.66103757656,
+      "bbox_mm": {
+        "x": 251.48172299670617,
+        "y": 29.999999999999993,
+        "z": 459.91871818519303
+      },
+      "category": null
+    },
+    {
+      "item_no": 227,
+      "part_name": "But裲2",
+      "qty": 4,
+      "material": null,
+      "volume_mm3": 10163.314033750796,
+      "bbox_mm": {
+        "x": 32.00000000000001,
+        "y": 32.0,
+        "z": 45.0
+      },
+      "category": null
+    },
+    {
+      "item_no": 229,
+      "part_name": "bielle101A",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 73041.2549345569,
+      "bbox_mm": {
+        "x": 26.651146618686376,
+        "y": 233.0,
+        "z": 27.40459639652073
+      },
+      "category": null
+    },
+    {
+      "item_no": 232,
+      "part_name": "p3-act_RNZ7",
+      "qty": 3,
+      "material": null,
+      "volume_mm3": 85596.50915127966,
+      "bbox_mm": {
+        "x": 97.00000000000006,
+        "y": 43.62790487492565,
+        "z": 111.29477200578702
+      },
+      "category": null
+    },
+    {
+      "item_no": 233,
+      "part_name": "BIELLE101A_type1",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 88066.05747935048,
+      "bbox_mm": {
+        "x": 40.94983897564555,
+        "y": 205.34758276008012,
+        "z": 48.777312656064886
+      },
+      "category": null
+    },
+    {
+      "item_no": 235,
+      "part_name": "bielle101A_type1",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 54728.345458093354,
+      "bbox_mm": {
+        "x": 25.060220812795563,
+        "y": 194.0,
+        "z": 25.783330624183478
+      },
+      "category": null
+    },
+    {
+      "item_no": 236,
+      "part_name": "actionneur100_RNZ008",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 595349.0063305513,
+      "bbox_mm": {
+        "x": 135.60484289934956,
+        "y": 144.7789524707833,
+        "z": 107.9843561381181
+      },
+      "category": null
+    },
+    {
+      "item_no": 240,
+      "part_name": "Manche100",
+      "qty": 4,
+      "material": null,
+      "volume_mm3": 430392.5576544315,
+      "bbox_mm": {
+        "x": 500.0,
+        "y": 12.500000000000014,
+        "z": 88.93163062389962
+      },
+      "category": null
+    },
+    {
+      "item_no": 242,
+      "part_name": "rotule-B101A001",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 16668.744113031877,
+      "bbox_mm": {
+        "x": 39.90703168106492,
+        "y": 36.279508261956636,
+        "z": 39.93854249508411
+      },
+      "category": null
+    },
+    {
+      "item_no": 272,
+      "part_name": "p2-act_RNZ7",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 95798.79399408231,
+      "bbox_mm": {
+        "x": 75.74279723794558,
+        "y": 224.17235490130537,
+        "z": 89.3499097882611
+      },
+      "category": null
+    },
+    {
+      "item_no": 276,
+      "part_name": "Manche101",
+      "qty": 4,
+      "material": null,
+      "volume_mm3": 430392.55765443144,
+      "bbox_mm": {
+        "x": 500.0,
+        "y": 12.500000000000014,
+        "z": 88.93163062389962
+      },
+      "category": null
+    },
+    {
+      "item_no": 277,
+      "part_name": "levier210",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 36297.115876660784,
+      "bbox_mm": {
+        "x": 117.3963409725954,
+        "y": 38.998141055553845,
+        "z": 112.55717991620061
+      },
+      "category": null
+    },
+    {
+      "item_no": 279,
+      "part_name": "levier100_Premire occurrence",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 3954.221700933972,
+      "bbox_mm": {
+        "x": 25.0,
+        "y": 25.0,
+        "z": 25.0
+      },
+      "category": null
+    },
+    {
+      "item_no": 280,
+      "part_name": "BIELLE101A001",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 106378.97661352802,
+      "bbox_mm": {
+        "x": 45.27573759518398,
+        "y": 244.4672285322913,
+        "z": 40.97711605505924
+      },
+      "category": null
+    },
+    {
+      "item_no": 282,
+      "part_name": "rotule-B101A005",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 16668.744113031866,
+      "bbox_mm": {
+        "x": 40.88945782154022,
+        "y": 36.0677595215203,
+        "z": 42.41375994166508
+      },
+      "category": null
+    },
+    {
+      "item_no": 283,
+      "part_name": "PALIER-201",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 771120.2581138873,
+      "bbox_mm": {
+        "x": 363.99638195512455,
+        "y": 79.3994079167208,
+        "z": 362.4806684407811
+      },
+      "category": null
+    },
+    {
+      "item_no": 287,
+      "part_name": "But裲1",
+      "qty": 4,
+      "material": null,
+      "volume_mm3": 189914.16857711255,
+      "bbox_mm": {
+        "x": 94.0,
+        "y": 64.0,
+        "z": 45.0
+      },
+      "category": null
+    },
+    {
+      "item_no": 288,
+      "part_name": "Noyeau2",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 4274.56305910986,
+      "bbox_mm": {
+        "x": 26.995689014324213,
+        "y": 25.0,
+        "z": 26.995689014324213
+      },
+      "category": null
+    },
+    {
+      "item_no": 289,
+      "part_name": "Pi碥203",
+      "qty": 1,
+      "material": null,
+      "volume_mm3": 161703.87215593687,
+      "bbox_mm": {
+        "x": 287.9999999999999,
+        "y": 10.000000000000014,
+        "z": 287.9999999999999
+      },
+      "category": null
+    },
+    {
+      "item_no": 290,
+      "part_name": "Noyeau003",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 11948.004477711374,
+      "bbox_mm": {
+        "x": 50.00000000000001,
+        "y": 24.999999999999996,
+        "z": 25.0
+      },
+      "category": null
+    },
+    {
+      "item_no": 292,
+      "part_name": "but裭sphere002",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 40070.41637811471,
+      "bbox_mm": {
+        "x": 50.96855719877256,
+        "y": 60.0,
+        "z": 46.01209138148894
+      },
+      "category": null
+    },
+    {
+      "item_no": 293,
+      "part_name": "MANCHE-204",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 1534002.4446167122,
+      "bbox_mm": {
+        "x": 470.3989831706318,
+        "y": 151.62190728653536,
+        "z": 419.42838680110526
+      },
+      "category": null
+    },
+    {
+      "item_no": 295,
+      "part_name": "but裭sphere1",
+      "qty": 2,
+      "material": null,
+      "volume_mm3": 40070.41637811469,
+      "bbox_mm": {
+        "x": 50.96855719877256,
+        "y": 59.999999999999986,
+        "z": 46.01209138148894
+      },
+      "category": null
+    },
+    {
+      "item_no": 296,
+      "part_name": "actionneur100_RNZ009",
+      "qty": 1,
+      "material": "None",
+      "volume_mm3": 595349.0063305516,
+      "bbox_mm": {
+        "x": 128.22800162593546,
+        "y": 146.8077387706743,
+        "z": 135.01012922451224
+      },
+      "category": null
+    }
+  ],
+  "largest_parts": [
+    {
+      "part_name": "ROTOR-201NAL-Z7",
+      "volume_mm3": 21374159.896618314,
+      "bbox_mm": {
+        "x": 1105.356166598433,
+        "y": 946.1535273835689,
+        "z": 1104.6424852085647
+      },
+      "qty": 1
+    },
+    {
+      "part_name": "Arbre1",
+      "volume_mm3": 3019956.6001277957,
+      "bbox_mm": {
+        "x": 146.00000000000009,
+        "y": 892.0,
+        "z": 146.00000000000009
+      },
+      "qty": 1
+    },
+    {
+      "part_name": "ROTOR-011",
+      "volume_mm3": 2405908.7502330323,
+      "bbox_mm": {
+        "x": 605.0600096599882,
+        "y": 60.00000000000023,
+        "z": 942.3576163677762
+      },
+      "qty": 1
+    },
+    {
+      "part_name": "ROTOR-10",
+      "volume_mm3": 2405908.7502330304,
+      "bbox_mm": {
+        "x": 942.3576163677747,
+        "y": 60.00000000000023,
+        "z": 605.0600096599901
+      },
+      "qty": 1
+    },
+    {
+      "part_name": "SPHERE2",
+      "volume_mm3": 1664168.459589239,
+      "bbox_mm": {
+        "x": 169.60000000000002,
+        "y": 222.93692539163615,
+        "z": 169.60000000000002
+      },
+      "qty": 1
+    }
+  ],
+  "repetition": {
+    "top_repeated": [
+      {
+        "part_name": "Lame1",
+        "qty": 4
+      },
+      {
+        "part_name": "But裲",
+        "qty": 4
+      },
+      {
+        "part_name": "But裱",
+        "qty": 4
+      },
+      {
+        "part_name": "Lame11",
+        "qty": 4
+      },
+      {
+        "part_name": "But裲0",
+        "qty": 4
+      },
+      {
+        "part_name": "Levier1",
+        "qty": 4
+      },
+      {
+        "part_name": "But裲2",
+        "qty": 4
+      },
+      {
+        "part_name": "Manche100",
+        "qty": 4
+      },
+      {
+        "part_name": "Manche101",
+        "qty": 4
+      },
+      {
+        "part_name": "But裲1",
+        "qty": 4
+      }
+    ],
+    "repeated_share_pct": 68.85245901639344
+  },
+  "insights": [
+    {
+      "severity": "info",
+      "title": "Moderate Assembly Complexity",
+      "details": "Assembly complexity score is 70/100. Monitor for potential simplification opportunities.",
+      "evidence": {
+        "complexity_score": 70
+      }
+    },
+    {
+      "severity": "info",
+      "title": "Repetition Opportunity",
+      "details": "Part 'Lame1' appears 4 times. Consider standardizing similar parts or using modular design.",
+      "evidence": {
+        "top_repeated": [
+          {
+            "part_name": "Lame1",
+            "qty": 4
+          },
+          {
+            "part_name": "But裲",
+            "qty": 4
+          },
+          {
+            "part_name": "But裱",
+            "qty": 4
+          },
+          {
+            "part_name": "Lame11",
+            "qty": 4
+          },
+          {
+            "part_name": "But裲0",
+            "qty": 4
+          }
+        ],
+        "repeated_share_pct": 68.85245901639344
+      }
+    }
+  ],
+  "manufacturing_hints": [
+    {
+      "title": "High Part Repetition",
+      "details": "87.2% of parts are repeated. Consider batch manufacturing or modular tooling.",
+      "evidence": {
+        "repeated_share_pct": 87.16216216216216
+      }
+    },
+    {
+      "title": "Large Part Detected",
+      "details": "Largest part 'ROTOR-201NAL-Z7' has volume 21374160 mm³. Consider manufacturing method and material selection.",
+      "evidence": {
+        "largest_part": {
+          "part_name": "ROTOR-201NAL-Z7",
+          "volume_mm3": 21374159.896618314,
+          "bbox_mm": {
+            "x": 1105.356166598433,
+            "y": 946.1535273835689,
+            "z": 1104.6424852085647
+          },
+          "qty": 1
+        }
+      }
+    }
+  ],
+  "health_check": {
+    "score_0_100": 75,
+    "warnings": [
+      "1 validation error(s)"
+    ]
+  },
+  "next_steps": [
+    "Review assembly snapshot and BOM for accuracy",
+    "Verify part quantities match design intent",
+    "Evaluate manufacturing strategy for repeated parts"
+  ],
+  "reference_geometry": [
+    {
+      "part_name": "Y-axis",
+      "part_id": "PART_13708",
+      "reason": "name contains reference geometry keyword"
+    },
+    {
+      "part_name": "X-axis",
+      "part_id": "PART_18330",
+      "reason": "name contains reference geometry keyword"
+    },
+    {
+      "part_name": "YZ-plane",
+      "part_id": "PART_23557",
+      "reason": "name contains reference geometry keyword"
+    },
+    {
+      "part_name": "Z-axis",
+      "part_id": "PART_34888",
+      "reason": "name contains reference geometry keyword"
+    },
+    {
+      "part_name": "XZ-plane",
+      "part_id": "PART_36125",
+      "reason": "name contains reference geometry keyword"
+    },
+    {
+      "part_name": "XY-plane",
+      "part_id": "PART_77574",
+      "reason": "name contains reference geometry keyword"
+    }
+  ]
+}

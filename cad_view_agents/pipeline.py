@@ -9,6 +9,7 @@ import os
 import json
 import time
 import argparse
+import subprocess
 from typing import Dict, List, Optional, Tuple
 
 # Add current directory to path for imports
@@ -18,8 +19,33 @@ else:
     # When executed via exec(), use current working directory
     sys.path.insert(0, os.getcwd())
 
-from agents import import_agent, assembly_analyzer_agent, ai_analyzer_agent, qa_agent
-from agents.techdraw_agent import TechDrawAgent
+# Ensure user site-packages are available (for CADQuery, reportlab, etc.)
+try:
+    import site
+    user_site = site.getusersitepackages()
+    if user_site and user_site not in sys.path:
+        sys.path.insert(0, user_site)
+except Exception:
+    pass  # Ignore if site module not available or user site not enabled
+
+# Conditional FreeCAD imports - pipeline can start even if FreeCAD not available
+try:
+    from agents import import_agent, assembly_analyzer_agent, ai_analyzer_agent, qa_agent
+    from agents.techdraw_agent import TechDrawAgent
+    FREECAD_AVAILABLE = True
+except ImportError as e:
+    if "FreeCAD" in str(e):
+        FREECAD_AVAILABLE = False
+        import_agent = None
+        assembly_analyzer_agent = None
+        ai_analyzer_agent = None
+        qa_agent = None
+        TechDrawAgent = None
+        print("Warning: FreeCAD not available. Pipeline requires FreeCAD for STEP import and analysis.")
+        print("  Install FreeCAD or use run_pipeline.py which uses FreeCAD's Python interpreter.")
+    else:
+        raise
+
 from core.part_tree import PartTree
 from core.view_candidates import ViewCandidateGenerator
 from core.view_scoring import ViewScorer
@@ -27,6 +53,11 @@ from core.layout_engine import LayoutEngine
 from core.balloon_engine import BalloonEngine
 from core.bom_generator import BOMGenerator
 from core.assembly_snapshot import build_snapshot, save_snapshot
+from core.drawing_plan import DrawingPlan
+from pathlib import Path
+
+# Lazy import of CADQueryEngine - only import when needed
+CADQueryEngine = None
 
 
 def log(trace: List[Dict], agent: str, data: Dict):
@@ -89,6 +120,14 @@ def run_pipeline(step_path: str, output_path: str, options: Dict) -> Dict:
     trace = []
     
     try:
+        # Check if FreeCAD is available
+        if not FREECAD_AVAILABLE:
+            return {
+                "status": "failed",
+                "error": "FreeCAD is required for STEP import and analysis. Use run_pipeline.py or install FreeCAD.",
+                "trace": trace
+            }
+        
         # Phase 1: Import & Assembly Analysis
         print(f"[1/8] Importing STEP file: {step_path}")
         import_result = import_agent.run(step_path)
@@ -183,52 +222,259 @@ def run_pipeline(step_path: str, output_path: str, options: Dict) -> Dict:
         })
         print(f"  [OK] Sheet: {sheet_size.name}, Scale: {scale}")
         
-        # Phase 4: TechDraw Generation
-        print("[6/8] Generating TechDraw views...")
-        techdraw_agent = TechDrawAgent()
-        page = techdraw_agent.create_page(sheet_size)
-        
-        if page is None:
-            print("  [WARN] TechDraw not available, using fallback exporters")
-        
-        # Create TechDraw views
-        techdraw_views = []
-        for placement in view_placements:
-            view = techdraw_agent.create_view(page, placement, doc)
-            if view:
-                techdraw_views.append(view)
-        
-        # Apply hidden lines
-        techdraw_agent.apply_hidden_lines(techdraw_views, options.get("hidden_line_style", "Dashed"))
-        print(f"  [OK] Created {len(techdraw_views)} TechDraw views")
-        
-        # Phase 5: BOM Generation (before balloons - needed for unique part count)
+        # Phase 5: BOM Generation (needed for snapshot and drawing)
         print("[7/8] Generating BOM...")
         bom_generator = BOMGenerator()
         balloon_engine = BalloonEngine()
         item_numbers = balloon_engine.assign_item_numbers(part_tree)
         part_metadata = bom_generator.extract_part_metadata(part_tree, item_numbers)
         bom_table = bom_generator.generate_table(part_metadata)
-        bom_position = bom_generator.place_table(sheet_size, bom_table)
-        techdraw_agent.add_bom_table(page, bom_table, bom_position)
+        
+        # Compute balloon assignments (needed for drawing plan)
+        balloons = balloon_engine.place_balloons(view_placements, part_tree, item_numbers, sheet_size, bom_metadata=part_metadata)
+        
+        # Generate assembly_id (same logic as in snapshot building)
+        from core.assembly_snapshot import _assembly_id
+        assembly_id = _assembly_id(step_path)
+        
+        # Create initial metadata for drawing plan
+        initial_metadata = {
+            "assembly_id": assembly_id,
+            "filename": step_filename,
+            "sheet_size": sheet_size.name,
+            "scale": scale,
+            "views": [v[0].name for v in selected_views]
+        }
+        
+        # Create drawing plan
+        drawing_plan = DrawingPlan(
+            assembly_id=assembly_id,
+            sheet_size=sheet_size.name,
+            scale=scale,
+            view_placements=view_placements,
+            bom_table=bom_table,
+            balloons=balloons,
+            metadata=initial_metadata
+        )
+        
+        # Save drawing plan for debugging/reproducibility and post-processing
+        plan_dir = Path("output") / assembly_id / "drawing"
+        plan_dir.mkdir(parents=True, exist_ok=True)
+        plan_path = plan_dir / "drawing_plan.json"
+        
+        # Save full plan data including view placements for post-processing
+        plan_dict = drawing_plan.to_dict()
+        # Add view placement details for reconstruction
+        plan_dict["view_placements_data"] = [
+            {
+                "view_name": vp.view.name,
+                "view_direction": vp.view.direction,
+                "view_type": vp.view.type,
+                "position": vp.position,
+                "scale": vp.scale,
+                "width_mm": vp.width_mm,
+                "height_mm": vp.height_mm
+            }
+            for vp in view_placements
+        ]
+        plan_dict["bom_table"] = bom_table.to_dict() if bom_table else {}
+        plan_dict["step_path"] = step_path
+        
+        with open(plan_path, "w") as f:
+            json.dump(plan_dict, f, indent=2)
+        print(f"  [OK] Saved drawing plan: {plan_path}")
+        print(f"  [INFO] To render with CADQuery (if not available in FreeCAD Python), run:")
+        print(f"        python render_postprocess.py {plan_path} {step_path} {assembly_id}")
+        
+        # Check if we should skip TechDraw/export (demo mode - only snapshot + RAG)
+        skip_techdraw = options.get("skip_techdraw", False)  # Default to False (generate drawings)
+        
+        artifacts = []  # Initialize artifacts list
+        export_errors = []  # Initialize export_errors list
+        render_engine_used = None
+        
+        if not skip_techdraw:
+            # Always use FreeCAD TechDraw worker (easy mode)
+            print("[6/8] Using FreeCAD TechDraw worker...")
+            
+            # Prepare drawing plan JSON with all necessary data
+            output_dir = Path("output") / assembly_id / "drawing"
+            output_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Build complete drawing plan for worker
+            plan_dict = drawing_plan.to_dict()
+            plan_dict["step_path"] = step_path
+            
+            # Add view details
+            plan_dict["views"] = []
+            for i, (view_candidate, score) in enumerate(selected_views):
+                if i < len(view_placements):
+                    placement = view_placements[i]
+                    plan_dict["views"].append({
+                        "name": view_candidate.name,
+                        "direction": list(view_candidate.direction),
+                        "position": list(placement.position),
+                        "scale": placement.scale,
+                        "width_mm": placement.width_mm,
+                        "height_mm": placement.height_mm
+                    })
+            
+            # Add view placements
+            plan_dict["view_placements"] = []
+            for placement in view_placements:
+                plan_dict["view_placements"].append({
+                    "position": list(placement.position),
+                    "scale": placement.scale,
+                    "width_mm": placement.width_mm,
+                    "height_mm": placement.height_mm
+                })
+            
+            # Add BOM rows
+            if bom_table:
+                plan_dict["bom"] = {
+                    "rows": []
+                }
+                for part in bom_table.parts:
+                    plan_dict["bom"]["rows"].append({
+                        "item_number": getattr(part, 'item_number', 0),
+                        "part_id": getattr(part, 'part_id', ''),
+                        "quantity": getattr(part, 'quantity', 1)
+                    })
+            
+            # Add balloons
+            if balloons:
+                plan_dict["balloons"] = []
+                for balloon in balloons:
+                    plan_dict["balloons"].append({
+                        "item_number": getattr(balloon, 'item_number', 0),
+                        "part_id": getattr(balloon, 'part_id', ''),
+                        "anchor_point": list(getattr(balloon, 'anchor_point', [0, 0])),
+                        "view_name": getattr(balloon, 'view_name', '')
+                    })
+            
+            # Save complete drawing plan
+            plan_path = output_dir / "drawing_plan.json"
+            with open(plan_path, "w") as f:
+                json.dump(plan_dict, f, indent=2)
+            print(f"  [OK] Saved drawing plan: {plan_path}")
+            
+            # Call worker as subprocess
+            # Since we're running via run_pipeline.py which uses FreeCAD's Python,
+            # we need to use FreeCADCmd with -c flag to execute Python code directly
+            # This prevents FreeCAD from auto-opening files
+            worker_script = Path(__file__).parent / "render_workers" / "freecad_techdraw_worker.py"
+            
+            # Create Python code to execute the worker
+            worker_code = f'''
+import sys
+import os
+sys.path.insert(0, r"{Path(__file__).parent}")
+os.chdir(r"{Path(__file__).parent}")
+
+# Execute worker script
+with open(r"{worker_script}", 'r', encoding='utf-8') as f:
+    code = compile(f.read(), r"{worker_script}", 'exec')
+    sys.argv = ['freecad_techdraw_worker.py', r"{plan_path}", r"{step_path}", r"{output_dir}"]
+    exec(code, {{'__name__': '__main__', '__file__': r"{worker_script}"}})
+'''
+            
+            # Use FreeCADCmd with -c flag to execute code directly
+            import platform
+            import shutil
+            if platform.system() == "Linux":
+                # Find FreeCADCmd
+                freecad_cmd = shutil.which("freecadcmd") or "freecadcmd"
+                worker_cmd = ["xvfb-run", "-a", freecad_cmd, "-c", worker_code]
+            else:
+                # On Windows, find FreeCADCmd
+                freecad_cmd = None
+                program_files = os.environ.get("ProgramFiles", "C:\\Program Files")
+                for version in ["1.0", "0.21", "0.20"]:
+                    test_path = os.path.join(program_files, f"FreeCAD {version}", "bin", "FreeCADCmd.exe")
+                    if os.path.isfile(test_path):
+                        freecad_cmd = test_path
+                        break
+                
+                if not freecad_cmd:
+                    # Try to find in PATH
+                    freecad_cmd = shutil.which("FreeCADCmd.exe") or shutil.which("freecadcmd")
+                
+                if freecad_cmd:
+                    worker_cmd = [freecad_cmd, "-c", worker_code]
+                else:
+                    # Fallback: use current Python (should be FreeCAD's Python)
+                    worker_cmd = [sys.executable, "-c", worker_code]
+            
+            # Run worker with timeout and logging
+            log_path = output_dir / "render.log"
+            max_retries = 1
+            timeout_seconds = 300  # 5 minutes
+            
+            for attempt in range(max_retries + 1):
+                try:
+                    print(f"  [INFO] Running worker (attempt {attempt + 1}/{max_retries + 1})...")
+                    with open(log_path, "w") as log_file:
+                        result = subprocess.run(
+                            worker_cmd,
+                            stdout=log_file,
+                            stderr=subprocess.STDOUT,
+                            timeout=timeout_seconds,
+                            cwd=str(Path(__file__).parent)
+                        )
+                    
+                    if result.returncode == 0:
+                        pdf_path = output_dir / "drawing.pdf"
+                        if pdf_path.exists():
+                            artifacts.append(str(pdf_path))
+                            print(f"  [OK] Worker generated PDF: {pdf_path}")
+                            render_engine_used = "FreeCADTechDraw"
+                            break
+                        else:
+                            print(f"  [WARN] Worker completed but PDF not found: {pdf_path}")
+                            if attempt < max_retries:
+                                print(f"  [INFO] Retrying...")
+                                continue
+                    else:
+                        print(f"  [WARN] Worker failed with exit code {result.returncode}")
+                        if attempt < max_retries:
+                            print(f"  [INFO] Retrying...")
+                            continue
+                        else:
+                            export_errors.append(f"Worker failed with exit code {result.returncode}. Check {log_path}")
+                except subprocess.TimeoutExpired:
+                    print(f"  [ERROR] Worker timed out after {timeout_seconds} seconds")
+                    export_errors.append(f"Worker timed out after {timeout_seconds} seconds")
+                    if attempt < max_retries:
+                        print(f"  [INFO] Retrying...")
+                        continue
+                except Exception as e:
+                    print(f"  [ERROR] Worker execution failed: {e}")
+                    export_errors.append(f"Worker execution failed: {e}")
+                    if attempt < max_retries:
+                        print(f"  [INFO] Retrying...")
+                        continue
+        else:
+            print("[6/8] Skipping drawing generation (demo mode)")
+        
         log(trace, "bom", {
             "part_count": len(part_metadata),
             "table_size": bom_generator.calculate_table_size(bom_table)
         })
         print(f"  [OK] Generated BOM with {len(part_metadata)} parts")
         
-        # Phase 6: Ballooning (using BOM metadata for unique parts only)
-        print("[8/8] Placing balloons...")
-        # Place balloons based on BOM rows (unique parts only)
+        # Phase 6: Ballooning (needed for snapshot metadata)
+        print("[8/8] Computing balloon assignments...")
+        # Compute balloon assignments (but don't place them if skipping TechDraw)
         balloons = balloon_engine.place_balloons(
             view_placements,
             part_tree,
             item_numbers,
             sheet_size,
-            bom_metadata=part_metadata  # Pass BOM metadata to place one balloon per unique part
+            bom_metadata=part_metadata
         )
         balloons = balloon_engine.route_leaders(balloons, view_placements)
-        techdraw_agent.add_balloons(page, balloons)
+        
+        # Balloons are handled by the worker, no need to add them here
         
         # Verify balloon count matches BOM row count
         expected_balloons = len(part_metadata)
@@ -239,15 +485,14 @@ def run_pipeline(step_path: str, output_path: str, options: Dict) -> Dict:
             "item_numbers": item_numbers
         })
         if placed_balloons == expected_balloons:
-            print(f"  [OK] Placed {placed_balloons} balloons (matches BOM rows)")
+            print(f"  [OK] Computed {placed_balloons} balloon assignments (matches BOM rows)")
         else:
-            print(f"  [WARN] Placed {placed_balloons} balloons (expected {expected_balloons} from BOM rows)")
+            print(f"  [WARN] Computed {placed_balloons} balloon assignments (expected {expected_balloons} from BOM rows)")
         
         # Save metadata + snapshot BEFORE export (so we have them even if export hangs)
         metadata_path = output_path + ".json" if not output_path.endswith((".pdf", ".dxf")) else output_path.rsplit(".", 1)[0] + ".json"
         output_dir = os.path.dirname(metadata_path) or "."
-        artifacts = []
-        export_errors = []
+        # artifacts and export_errors are already initialized earlier
         qa_result = {"status": "skip", "issues": []}
         metadata = {
             "step_file": step_path,
@@ -301,78 +546,26 @@ def run_pipeline(step_path: str, output_path: str, options: Dict) -> Dict:
                     print(f"  [OK] RAG index updated for {snapshot.get('assembly_id', '')}")
                 except Exception as rag_err:
                     print(f"  [WARN] RAG index skipped: {rag_err}")
-        print("  [INFO] Snapshot + RAG ready. Export may take a while (or hang in headless); you can Ctrl+C if needed.")
+        print("  [INFO] Snapshot + RAG ready.")
         
-        # Phase 7: Export
-        print("[Export] Exporting to PDF/DXF...")
-        export_errors = []
-        
-        # Determine output format
-        try:
-            if output_path.endswith(".pdf"):
-                try:
-                    # Prepare metadata for export
-                    export_metadata = {
-                        "filename": os.path.basename(step_path),
-                        "sheet_size": sheet_size.name,
-                        "scale": scale,
-                        "views": [v[0].name for v in selected_views]
-                    }
-                    pdf_path = techdraw_agent.export_pdf(page, output_path, 
-                                                        view_placements, balloons, 
-                                                        bom_table, export_metadata,
-                                                        view_objects=techdraw_views)
-                    if pdf_path:
-                        artifacts.append(pdf_path)
-                        print(f"  [OK] Exported PDF: {pdf_path}")
-                except Exception as e:
-                    export_errors.append(f"PDF export failed: {e}")
-                    print(f"  [WARN] PDF export failed: {e}")
-            elif output_path.endswith(".dxf"):
-                try:
-                    dxf_path = techdraw_agent.export_dxf(page, output_path)
-                    if dxf_path:
-                        artifacts.append(dxf_path)
-                        print(f"  [OK] Exported DXF: {dxf_path}")
-                except Exception as e:
-                    export_errors.append(f"DXF export failed: {e}")
-                    print(f"  [WARN] DXF export failed: {e}")
-            else:
-                # Export both
-                try:
-                    # Prepare metadata for export
-                    export_metadata = {
-                        "filename": os.path.basename(step_path),
-                        "sheet_size": sheet_size.name,
-                        "scale": scale,
-                        "views": [v[0].name for v in selected_views]
-                    }
-                    pdf_path = techdraw_agent.export_pdf(page, output_path + ".pdf",
-                                                        view_placements, balloons, bom_table, export_metadata,
-                                                        view_objects=techdraw_views)
-                    if pdf_path:
-                        artifacts.append(pdf_path)
-                        print(f"  [OK] Exported PDF: {pdf_path}")
-                except Exception as e:
-                    export_errors.append(f"PDF export failed: {e}")
-                    print(f"  [WARN] PDF export failed: {e}")
-                
-                try:
-                    dxf_path = techdraw_agent.export_dxf(page, output_path + ".dxf")
-                    if dxf_path:
-                        artifacts.append(dxf_path)
-                        print(f"  [OK] Exported DXF: {dxf_path}")
-                except Exception as e:
-                    export_errors.append(f"DXF export failed: {e}")
-                    print(f"  [WARN] DXF export failed: {e}")
-        except Exception as e:
-            export_errors.append(str(e))
-            print(f"  [WARN] Export failed: {e}")
+        # Phase 7: Export (skip if in demo mode or already exported by worker)
+        if skip_techdraw:
+            print("[Export] Skipping PDF/DXF export (demo mode - snapshot only)")
+            if not export_errors:
+                export_errors.append("Export skipped in demo mode")
+        elif render_engine_used == "FreeCADTechDraw":
+            # Already exported by FreeCAD TechDraw worker
+            print("[Export] PDF already generated by FreeCAD TechDraw worker")
+        else:
+            # Worker failed or was skipped - no export available
+            print("[Export] No PDF generated (worker failed or skipped)")
+            if not export_errors:
+                export_errors.append("Worker did not generate PDF")
         
         log(trace, "export", {"artifacts": artifacts, "errors": export_errors})
         
-        # Phase 8: QA (only if we have artifacts)
-        if artifacts:
+        # Phase 8: QA (only if we have artifacts and not in demo mode)
+        if artifacts and not skip_techdraw:
             print("[QA] Running quality assurance...")
             qa_result = qa_agent.run(artifacts)
             log(trace, "qa_agent", qa_result)
@@ -381,7 +574,7 @@ def run_pipeline(step_path: str, output_path: str, options: Dict) -> Dict:
             else:
                 print(f"  [WARN] QA issues: {qa_result.get('issues', [])}")
         else:
-            print("[QA] Skipped (no artifacts to validate)")
+            print("[QA] Skipped (demo mode or no artifacts to validate)")
         
         # Update metadata with export result (artifacts, qa, export_errors)
         metadata["output_files"] = artifacts
@@ -470,6 +663,12 @@ def main():
         action="store_true",
         help="Enable AI-enhanced view ranking (optional)"
     )
+    parser.add_argument(
+        "--skip-techdraw",
+        action="store_true",
+        default=False,
+        help="Skip TechDraw/export generation (demo mode - snapshot only). Default: False (generate drawings)"
+    )
     
     args = parser.parse_args()
     
@@ -496,7 +695,9 @@ def main():
         "scale": args.scale,
         "max_views": args.max_views,
         "hidden_line_style": args.hidden_line_style,
-        "use_ai": args.use_ai
+        "use_ai": args.use_ai,
+        "skip_techdraw": args.skip_techdraw,  # Use command line argument (default: False)
+        "rag": True,  # Enable RAG indexing
     }
     
     # Run pipeline
