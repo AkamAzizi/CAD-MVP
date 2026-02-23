@@ -150,6 +150,19 @@ import os
 import json
 import traceback
 
+# Ensure user site-packages are available FIRST (before any other imports)
+# This is critical for CADQuery, reportlab, etc. to be found
+try:
+    import site
+    user_site = site.getusersitepackages()
+    if user_site:
+        if user_site not in sys.path:
+            sys.path.insert(0, user_site)
+        # Also ensure site-packages are initialized
+        site.addsitedir(user_site)
+except Exception:
+    pass  # Ignore if site module not available or user site not enabled
+
 # Get paths from environment
 SCRIPT_DIR = r"{script_dir}"
 ARGS_FILE = r"{temp_args_file}"
@@ -158,6 +171,9 @@ PIPELINE_PY = os.path.join(SCRIPT_DIR, 'pipeline.py')
 # Change to script directory
 os.chdir(SCRIPT_DIR)
 sys.path.insert(0, SCRIPT_DIR)
+
+# Ensure user site-packages are available (for CADQuery, reportlab, etc.)
+# This is done silently - no debug output needed
 
 try:
     # Read arguments from JSON file

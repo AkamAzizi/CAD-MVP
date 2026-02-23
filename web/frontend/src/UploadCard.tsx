@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
+import { AgentPipeline } from './components/AgentPipeline'
 
 const API_BASE = '/api'
 
@@ -32,7 +33,7 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
     } else if (f) {
       setFile(null)
       setStatus('error')
-      setStatusText('Invalid file type. Please select a .step or .stp file.')
+      setStatusText('Ogiltig filtyp. Välj en .step eller .stp fil.')
     } else {
       setFile(null)
     }
@@ -74,13 +75,13 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
   const process = useCallback(async () => {
     if (!file) return
     setStatus('uploading')
-    setStatusText('Uploading…')
+    setStatusText('Laddar upp…')
     const form = new FormData()
     form.append('file', file)
 
     try {
       setStatus('processing')
-      setStatusText('Processing (pipeline + snapshot)…')
+      setStatusText('Processar…')
       const res = await fetch(`${API_BASE}/assemblies/upload`, {
         method: 'POST',
         body: form,
@@ -101,7 +102,7 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
         return
       }
       const data = JSON.parse(text) as { assembly_id: string; snapshot_path?: string }
-      setStatusText('Ready')
+      setStatusText('Klar')
       onReady(data.assembly_id)
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e)
@@ -115,6 +116,16 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
 
   return (
     <div className="upload-card">
+      {status === 'idle' && !file && (
+        <div className="empty-state-upload">
+          <p className="empty-state-title">Ladda upp en STEP-fil för att börja.</p>
+          <ul className="empty-state-features">
+            <li>BOM-analys på sekunder</li>
+            <li>Rapport med insikter</li>
+            <li>Q&A med part-referenser</li>
+          </ul>
+        </div>
+      )}
       <div
         className={`upload-zone ${dragover ? 'dragover' : ''}`}
         onDrop={onDrop}
@@ -127,9 +138,9 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
           type="file"
           accept={accept}
           onChange={onInputChange}
-          aria-label="Choose STEP file"
+          aria-label="Välj STEP-fil"
         />
-        <p>Drag & drop a STEP file here, or click to choose</p>
+        <p>Dra & släpp en STEP-fil här, eller klicka för att välja</p>
         {file && <p className="file-name">{file.name}</p>}
       </div>
       <div className="actions">
@@ -139,11 +150,11 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
           disabled={!file || isProcessing}
           onClick={process}
         >
-          {isProcessing ? 'Processing…' : 'Process'}
+          {isProcessing ? 'Processar…' : 'Ladda upp & processa'}
         </button>
         {status === 'ready' && (
-          <button type="button" className="btn" onClick={onReset}>
-            New file
+          <button type="button" className="btn btn-outline" onClick={onReset}>
+            Välj ny fil
           </button>
         )}
       </div>
@@ -151,6 +162,15 @@ export function UploadCard({ status, setStatus, onReady, onError, onReset }: Upl
         <p className={`status ${status === 'ready' ? 'ready' : status === 'error' ? 'error' : ''}`}>
           {statusText}
         </p>
+      )}
+      {isProcessing && (
+        <AgentPipeline
+          isActive={isProcessing}
+          isDone={status === 'ready'}
+        />
+      )}
+      {!file && status === 'idle' && (
+        <p className="upload-hint">STEP-filer kan vara stora. Bearbetning kan ta 10–60 sek.</p>
       )}
     </div>
   )

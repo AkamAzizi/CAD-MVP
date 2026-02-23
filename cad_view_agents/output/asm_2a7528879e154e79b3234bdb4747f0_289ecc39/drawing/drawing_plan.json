@@ -1,0 +1,1149 @@
+{
+  "assembly_id": "asm_2a7528879e154e79b3234bdb4747f0_289ecc39",
+  "sheet_size": "A4",
+  "scale": 0.1,
+  "view_count": 4,
+  "bom_item_count": 73,
+  "balloon_count": 73,
+  "metadata": {
+    "assembly_id": "asm_2a7528879e154e79b3234bdb4747f0_289ecc39",
+    "filename": "2a7528879e154e79b3234bdb4747f0b8_testar-process.STEP",
+    "sheet_size": "A4",
+    "scale": 0.1,
+    "views": [
+      "front",
+      "top",
+      "iso",
+      "right"
+    ]
+  },
+  "step_path": "C:\\Users\\akam3\\CAD-MVP\\web\\uploads\\2a7528879e154e79b3234bdb4747f0b8_testar-process.STEP",
+  "views": [
+    {
+      "name": "front",
+      "direction": [
+        0,
+        0,
+        1
+      ],
+      "position": [
+        10.0,
+        157.0
+      ],
+      "scale": 0.1,
+      "width_mm": 10.0,
+      "height_mm": 10.0
+    },
+    {
+      "name": "top",
+      "direction": [
+        0,
+        1,
+        0
+      ],
+      "position": [
+        40.0,
+        157.0
+      ],
+      "scale": 0.1,
+      "width_mm": 10.0,
+      "height_mm": 10.0
+    },
+    {
+      "name": "iso",
+      "direction": [
+        1,
+        1,
+        1
+      ],
+      "position": [
+        10.0,
+        127.0
+      ],
+      "scale": 0.1,
+      "width_mm": 10.0,
+      "height_mm": 10.0
+    },
+    {
+      "name": "right",
+      "direction": [
+        1,
+        0,
+        0
+      ],
+      "position": [
+        40.0,
+        127.0
+      ],
+      "scale": 0.1,
+      "width_mm": 10.0,
+      "height_mm": 10.0
+    }
+  ],
+  "view_placements": [
+    {
+      "position": [
+        10.0,
+        157.0
+      ],
+      "scale": 0.1,
+      "width_mm": 10.0,
+      "height_mm": 10.0
+    },
+    {
+      "position": [
+        40.0,
+        157.0
+      ],
+      "scale": 0.1,
+      "width_mm": 10.0,
+      "height_mm": 10.0
+    },
+    {
+      "position": [
+        10.0,
+        127.0
+      ],
+      "scale": 0.1,
+      "width_mm": 10.0,
+      "height_mm": 10.0
+    },
+    {
+      "position": [
+        40.0,
+        127.0
+      ],
+      "scale": 0.1,
+      "width_mm": 10.0,
+      "height_mm": 10.0
+    }
+  ],
+  "bom": {
+    "rows": [
+      {
+        "item_number": 4,
+        "part_id": "PART_10452",
+        "quantity": 4
+      },
+      {
+        "item_number": 5,
+        "part_id": "PART_12363",
+        "quantity": 1
+      },
+      {
+        "item_number": 6,
+        "part_id": "PART_12827",
+        "quantity": 1
+      },
+      {
+        "item_number": 35,
+        "part_id": "PART_13708",
+        "quantity": 29
+      },
+      {
+        "item_number": 36,
+        "part_id": "PART_15619",
+        "quantity": 1
+      },
+      {
+        "item_number": 40,
+        "part_id": "PART_16799",
+        "quantity": 4
+      },
+      {
+        "item_number": 41,
+        "part_id": "PART_17316",
+        "quantity": 1
+      },
+      {
+        "item_number": 45,
+        "part_id": "PART_17862",
+        "quantity": 4
+      },
+      {
+        "item_number": 74,
+        "part_id": "PART_18330",
+        "quantity": 29
+      },
+      {
+        "item_number": 75,
+        "part_id": "PART_20375",
+        "quantity": 1
+      },
+      {
+        "item_number": 104,
+        "part_id": "PART_23557",
+        "quantity": 29
+      },
+      {
+        "item_number": 106,
+        "part_id": "PART_24746",
+        "quantity": 2
+      },
+      {
+        "item_number": 107,
+        "part_id": "PART_24796",
+        "quantity": 1
+      },
+      {
+        "item_number": 110,
+        "part_id": "PART_2495",
+        "quantity": 3
+      },
+      {
+        "item_number": 113,
+        "part_id": "PART_2598",
+        "quantity": 3
+      },
+      {
+        "item_number": 114,
+        "part_id": "PART_27040",
+        "quantity": 1
+      },
+      {
+        "item_number": 115,
+        "part_id": "PART_28248",
+        "quantity": 1
+      },
+      {
+        "item_number": 116,
+        "part_id": "PART_29657",
+        "quantity": 1
+      },
+      {
+        "item_number": 120,
+        "part_id": "PART_30582",
+        "quantity": 4
+      },
+      {
+        "item_number": 121,
+        "part_id": "PART_32008",
+        "quantity": 1
+      },
+      {
+        "item_number": 122,
+        "part_id": "PART_32403",
+        "quantity": 1
+      },
+      {
+        "item_number": 123,
+        "part_id": "PART_32658",
+        "quantity": 1
+      },
+      {
+        "item_number": 124,
+        "part_id": "PART_32670",
+        "quantity": 1
+      },
+      {
+        "item_number": 125,
+        "part_id": "PART_33085",
+        "quantity": 1
+      },
+      {
+        "item_number": 128,
+        "part_id": "PART_33281",
+        "quantity": 3
+      },
+      {
+        "item_number": 157,
+        "part_id": "PART_34888",
+        "quantity": 29
+      },
+      {
+        "item_number": 158,
+        "part_id": "PART_35226",
+        "quantity": 1
+      },
+      {
+        "item_number": 159,
+        "part_id": "PART_35647",
+        "quantity": 1
+      },
+      {
+        "item_number": 160,
+        "part_id": "PART_35721",
+        "quantity": 1
+      },
+      {
+        "item_number": 189,
+        "part_id": "PART_36125",
+        "quantity": 29
+      },
+      {
+        "item_number": 193,
+        "part_id": "PART_37690",
+        "quantity": 4
+      },
+      {
+        "item_number": 194,
+        "part_id": "PART_39446",
+        "quantity": 1
+      },
+      {
+        "item_number": 198,
+        "part_id": "PART_39923",
+        "quantity": 4
+      },
+      {
+        "item_number": 199,
+        "part_id": "PART_40113",
+        "quantity": 1
+      },
+      {
+        "item_number": 200,
+        "part_id": "PART_40777",
+        "quantity": 1
+      },
+      {
+        "item_number": 201,
+        "part_id": "PART_41313",
+        "quantity": 1
+      },
+      {
+        "item_number": 203,
+        "part_id": "PART_43890",
+        "quantity": 2
+      },
+      {
+        "item_number": 204,
+        "part_id": "PART_44975",
+        "quantity": 1
+      },
+      {
+        "item_number": 207,
+        "part_id": "PART_45000",
+        "quantity": 3
+      },
+      {
+        "item_number": 209,
+        "part_id": "PART_46132",
+        "quantity": 2
+      },
+      {
+        "item_number": 212,
+        "part_id": "PART_48557",
+        "quantity": 3
+      },
+      {
+        "item_number": 213,
+        "part_id": "PART_51743",
+        "quantity": 1
+      },
+      {
+        "item_number": 214,
+        "part_id": "PART_51882",
+        "quantity": 1
+      },
+      {
+        "item_number": 215,
+        "part_id": "PART_52371",
+        "quantity": 1
+      },
+      {
+        "item_number": 216,
+        "part_id": "PART_5324",
+        "quantity": 1
+      },
+      {
+        "item_number": 218,
+        "part_id": "PART_55266",
+        "quantity": 2
+      },
+      {
+        "item_number": 220,
+        "part_id": "PART_5741",
+        "quantity": 2
+      },
+      {
+        "item_number": 221,
+        "part_id": "PART_60953",
+        "quantity": 1
+      },
+      {
+        "item_number": 223,
+        "part_id": "PART_6200",
+        "quantity": 2
+      },
+      {
+        "item_number": 227,
+        "part_id": "PART_63387",
+        "quantity": 4
+      },
+      {
+        "item_number": 229,
+        "part_id": "PART_65752",
+        "quantity": 2
+      },
+      {
+        "item_number": 232,
+        "part_id": "PART_66252",
+        "quantity": 3
+      },
+      {
+        "item_number": 233,
+        "part_id": "PART_6736",
+        "quantity": 1
+      },
+      {
+        "item_number": 235,
+        "part_id": "PART_67719",
+        "quantity": 2
+      },
+      {
+        "item_number": 236,
+        "part_id": "PART_7040",
+        "quantity": 1
+      },
+      {
+        "item_number": 240,
+        "part_id": "PART_74184",
+        "quantity": 4
+      },
+      {
+        "item_number": 242,
+        "part_id": "PART_74935",
+        "quantity": 2
+      },
+      {
+        "item_number": 271,
+        "part_id": "PART_77574",
+        "quantity": 29
+      },
+      {
+        "item_number": 272,
+        "part_id": "PART_77590",
+        "quantity": 1
+      },
+      {
+        "item_number": 276,
+        "part_id": "PART_78883",
+        "quantity": 4
+      },
+      {
+        "item_number": 277,
+        "part_id": "PART_80077",
+        "quantity": 1
+      },
+      {
+        "item_number": 279,
+        "part_id": "PART_81548",
+        "quantity": 2
+      },
+      {
+        "item_number": 280,
+        "part_id": "PART_82565",
+        "quantity": 1
+      },
+      {
+        "item_number": 282,
+        "part_id": "PART_82614",
+        "quantity": 2
+      },
+      {
+        "item_number": 283,
+        "part_id": "PART_82773",
+        "quantity": 1
+      },
+      {
+        "item_number": 287,
+        "part_id": "PART_84020",
+        "quantity": 4
+      },
+      {
+        "item_number": 288,
+        "part_id": "PART_86758",
+        "quantity": 1
+      },
+      {
+        "item_number": 289,
+        "part_id": "PART_87158",
+        "quantity": 1
+      },
+      {
+        "item_number": 290,
+        "part_id": "PART_9161",
+        "quantity": 1
+      },
+      {
+        "item_number": 292,
+        "part_id": "PART_94425",
+        "quantity": 2
+      },
+      {
+        "item_number": 293,
+        "part_id": "PART_96046",
+        "quantity": 1
+      },
+      {
+        "item_number": 295,
+        "part_id": "PART_97883",
+        "quantity": 2
+      },
+      {
+        "item_number": 296,
+        "part_id": "PART_99232",
+        "quantity": 1
+      }
+    ]
+  },
+  "balloons": [
+    {
+      "item_number": 4,
+      "part_id": "PART_10452",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 5,
+      "part_id": "PART_12363",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 6,
+      "part_id": "PART_12827",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 35,
+      "part_id": "PART_13708",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 36,
+      "part_id": "PART_15619",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 40,
+      "part_id": "PART_16799",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 41,
+      "part_id": "PART_17316",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 45,
+      "part_id": "PART_17862",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 74,
+      "part_id": "PART_18330",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 75,
+      "part_id": "PART_20375",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 104,
+      "part_id": "PART_23557",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 106,
+      "part_id": "PART_24746",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 107,
+      "part_id": "PART_24796",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 110,
+      "part_id": "PART_2495",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 113,
+      "part_id": "PART_2598",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 114,
+      "part_id": "PART_27040",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 115,
+      "part_id": "PART_28248",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 116,
+      "part_id": "PART_29657",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 120,
+      "part_id": "PART_30582",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 121,
+      "part_id": "PART_32008",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 122,
+      "part_id": "PART_32403",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 123,
+      "part_id": "PART_32658",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 124,
+      "part_id": "PART_32670",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 125,
+      "part_id": "PART_33085",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 128,
+      "part_id": "PART_33281",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 157,
+      "part_id": "PART_34888",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 158,
+      "part_id": "PART_35226",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 159,
+      "part_id": "PART_35647",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 160,
+      "part_id": "PART_35721",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 189,
+      "part_id": "PART_36125",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 193,
+      "part_id": "PART_37690",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 194,
+      "part_id": "PART_39446",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 198,
+      "part_id": "PART_39923",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 199,
+      "part_id": "PART_40113",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 200,
+      "part_id": "PART_40777",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 201,
+      "part_id": "PART_41313",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 203,
+      "part_id": "PART_43890",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 204,
+      "part_id": "PART_44975",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 207,
+      "part_id": "PART_45000",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 209,
+      "part_id": "PART_46132",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 212,
+      "part_id": "PART_48557",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 213,
+      "part_id": "PART_51743",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 214,
+      "part_id": "PART_51882",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 215,
+      "part_id": "PART_52371",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 216,
+      "part_id": "PART_5324",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 218,
+      "part_id": "PART_55266",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 220,
+      "part_id": "PART_5741",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 221,
+      "part_id": "PART_60953",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 223,
+      "part_id": "PART_6200",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 227,
+      "part_id": "PART_63387",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 229,
+      "part_id": "PART_65752",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 232,
+      "part_id": "PART_66252",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 233,
+      "part_id": "PART_6736",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 235,
+      "part_id": "PART_67719",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 236,
+      "part_id": "PART_7040",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 240,
+      "part_id": "PART_74184",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 242,
+      "part_id": "PART_74935",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 271,
+      "part_id": "PART_77574",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 272,
+      "part_id": "PART_77590",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 276,
+      "part_id": "PART_78883",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 277,
+      "part_id": "PART_80077",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 279,
+      "part_id": "PART_81548",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 280,
+      "part_id": "PART_82565",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 282,
+      "part_id": "PART_82614",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 283,
+      "part_id": "PART_82773",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 287,
+      "part_id": "PART_84020",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 288,
+      "part_id": "PART_86758",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 289,
+      "part_id": "PART_87158",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 290,
+      "part_id": "PART_9161",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 292,
+      "part_id": "PART_94425",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 293,
+      "part_id": "PART_96046",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 295,
+      "part_id": "PART_97883",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    },
+    {
+      "item_number": 296,
+      "part_id": "PART_99232",
+      "anchor_point": [
+        0,
+        0
+      ],
+      "view_name": ""
+    }
+  ]
+}

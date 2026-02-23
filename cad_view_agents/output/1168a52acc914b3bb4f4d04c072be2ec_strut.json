@@ -1,5 +1,5 @@
 {
-  "step_file": "/Users/akamazizi/Desktop/CAD-MVP/web/uploads/1168a52acc914b3bb4f4d04c072be2ec_strut.step",
+  "step_file": "../web/uploads/1168a52acc914b3bb4f4d04c072be2ec_strut.step",
   "output_files": [],
   "part_count": 11,
   "views": [
@@ -15,10 +15,10 @@
     "PART_13708": 2,
     "PART_18330": 3,
     "PART_204": 4,
-    "PART_26161": 5,
-    "PART_34888": 6,
-    "PART_69837": 7,
-    "PART_70960": 8,
+    "PART_23557": 5,
+    "PART_26161": 6,
+    "PART_34888": 7,
+    "PART_36125": 8,
     "PART_74536": 9,
     "PART_77574": 10,
     "PART_99432": 11
@@ -62,28 +62,28 @@
       },
       {
         "item": 5,
+        "part_number": "PART_23557",
+        "description": "YZ-plane",
+        "quantity": 1,
+        "material": "N/A"
+      },
+      {
+        "item": 6,
         "part_number": "PART_26161",
         "description": "STRUT CHANNEL BEAM CLAMP BRACKET 004",
         "quantity": 1,
         "material": "N/A"
       },
       {
-        "item": 6,
+        "item": 7,
         "part_number": "PART_34888",
         "description": "Z-axis",
         "quantity": 1,
         "material": "N/A"
       },
       {
-        "item": 7,
-        "part_number": "PART_69837",
-        "description": "YZ-plane",
-        "quantity": 1,
-        "material": "N/A"
-      },
-      {
         "item": 8,
-        "part_number": "PART_70960",
+        "part_number": "PART_36125",
         "description": "XZ-plane",
         "quantity": 1,
         "material": "N/A"

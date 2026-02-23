@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { ChatPanel } from './ChatPanel'
 import { UploadCard } from './UploadCard'
 import { ReportPanel } from './ReportPanel'
+import { Stepper } from './components/Stepper'
+import { ArchitectureModal } from './components/ArchitectureModal'
 
 const API_BASE = '/api'
 
@@ -14,6 +16,8 @@ export default function App() {
   const [assemblyId, setAssemblyId] = useState<string | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const [existingAssemblies, setExistingAssemblies] = useState<Assembly[]>([])
+  const [hasReport, setHasReport] = useState(false)
+  const [showArchitecture, setShowArchitecture] = useState(false)
 
   const refreshAssemblies = useCallback(() => {
     fetch(`${API_BASE}/assemblies`)
@@ -26,10 +30,31 @@ export default function App() {
     refreshAssemblies()
   }, [refreshAssemblies])
 
+  // Check if report exists when assembly is ready
+  useEffect(() => {
+    if (status === 'ready' && assemblyId) {
+      fetch(`${API_BASE}/assemblies/${assemblyId}/report`)
+        .then((r) => {
+          if (r.ok) {
+            setHasReport(true)
+          } else {
+            setHasReport(false)
+          }
+        })
+        .catch(() => setHasReport(false))
+    } else {
+      setHasReport(false)
+    }
+  }, [status, assemblyId])
+
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
+
   const onReady = useCallback((id: string) => {
     setAssemblyId(id)
     setStatus('ready')
     setErrorMessage(null)
+    setSuccessMessage('Assembly bearbetad.')
+    setTimeout(() => setSuccessMessage(null), 3000)
   }, [])
 
   const onError = useCallback((msg: string) => {
@@ -42,11 +67,51 @@ export default function App() {
     setStatus('idle')
     setAssemblyId(null)
     setErrorMessage(null)
+    setHasReport(false)
   }, [])
+
+  const onReportGenerated = useCallback(() => {
+    setHasReport(true)
+  }, [])
+
+  // Determine current step for stepper
+  const getCurrentStep = (): 1 | 2 | 3 => {
+    if (status === 'idle' || status === 'uploading' || status === 'processing') {
+      return 1
+    }
+    if (status === 'ready' && assemblyId && !hasReport) {
+      return 2
+    }
+    if (status === 'ready' && assemblyId && hasReport) {
+      return 3
+    }
+    return 1
+  }
 
   return (
     <div className="app">
-      <h1>CAD-MVP · Assembly Q&A</h1>
+      <div className="hero">
+        <div className="hero-header">
+          <h1>AI-Driven Assembly Analysis Platform</h1>
+          <p className="hero-subtitle">Automatiserad BOM, riskanalys och intelligent Q&A för komplexa CAD-assemblies.</p>
+          <button
+            type="button"
+            className="btn-architecture-link"
+            onClick={() => setShowArchitecture(true)}
+          >
+            Visa teknisk översikt
+          </button>
+        </div>
+        <div className="business-value-strip">
+          <h3 className="business-value-title">Affärsvärde</h3>
+          <ul className="business-value-list">
+            <li>Minskad manuell granskning</li>
+            <li>Snabbare designiteration</li>
+            <li>Spårbar beslutsgrund</li>
+            <li>Strukturerad assembly-intelligens</li>
+          </ul>
+        </div>
+      </div>
       <UploadCard
         status={status}
         setStatus={setStatus}
@@ -71,10 +136,10 @@ export default function App() {
                 <button
                   type="button"
                   className="btn btn-delete"
-                  title={`Delete ${a.label || a.assembly_id}`}
+                  title={`Ta bort ${a.label || a.assembly_id}`}
                   onClick={async (e) => {
                     e.stopPropagation()
-                    if (confirm(`Delete assembly "${a.label || a.assembly_id}"? This cannot be undone.`)) {
+                    if (confirm(`Ta bort assembly "${a.label || a.assembly_id}"? Detta kan inte ångras.`)) {
                       try {
                         const res = await fetch(`${API_BASE}/assemblies/${a.assembly_id}`, {
                           method: 'DELETE',
@@ -87,10 +152,10 @@ export default function App() {
                           }
                         } else {
                           const text = await res.text()
-                          alert(`Failed to delete: ${text}`)
+                          alert(`Kunde inte ta bort: ${text}`)
                         }
                       } catch (err) {
-                        alert(`Error deleting assembly: ${err instanceof Error ? err.message : String(err)}`)
+                        alert(`Fel vid borttagning: ${err instanceof Error ? err.message : String(err)}`)
                       }
                     }
                   }}
@@ -107,12 +172,37 @@ export default function App() {
           {errorMessage}
         </div>
       )}
+      {successMessage && (
+        <div className="success-box" role="alert">
+          {successMessage}
+        </div>
+      )}
+      {(status === 'ready' || status === 'idle' || status === 'uploading' || status === 'processing') && (
+        <div className="stepper-container">
+          <Stepper currentStep={getCurrentStep()} />
+        </div>
+      )}
       {status === 'ready' && assemblyId && (
         <>
-          <div className="assembly-id">Assembly ID: {assemblyId}</div>
-          <ReportPanel assemblyId={assemblyId} />
+          <div className="assembly-id">
+            <span>Assembly ID: {assemblyId}</span>
+            <button
+              type="button"
+              className="btn-copy"
+              onClick={() => {
+                navigator.clipboard.writeText(assemblyId)
+              }}
+              title="Kopiera Assembly ID"
+            >
+              Kopiera
+            </button>
+          </div>
+          <ReportPanel assemblyId={assemblyId} onReportGenerated={onReportGenerated} />
           <ChatPanel assemblyId={assemblyId} />
         </>
+      )}
+      {showArchitecture && (
+        <ArchitectureModal onClose={() => setShowArchitecture(false)} />
       )}
     </div>
   )
