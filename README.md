@@ -80,6 +80,35 @@ CAD-MVP/
 - **[cad_view_agents/README.md](cad_view_agents/README.md)** – Pipeline details, CLI, RAG usage
 - **[web/README.md](web/README.md)** – Web app setup and API
 
+## System Architecture
+
+The system is built as a processing pipeline where uploaded STEP files
+trigger automated CAD analysis and documentation generation.
+
+Pipeline flow:
+
+Upload STEP File
+↓
+Assembly Import (FreeCAD)
+↓
+Part Tree Extraction
+↓
+View Selection
+↓
+Technical Drawing Generation (TechDraw)
+↓
+BOM & Balloon Generation
+↓
+Engineering Report
+↓
+RAG Index Creation
+↓
+Engineer Copilot Q&A
+
+This architecture follows an event-driven processing model and can be
+deployed in cloud environments where file uploads trigger compute jobs
+(e.g. serverless functions or container workers).
+
 ## API
 
 | Endpoint | Description |
